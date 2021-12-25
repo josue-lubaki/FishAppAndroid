@@ -21,6 +21,7 @@
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.
     </string>
+    <string name="commande_detail_page_price">@string/commande_page_price</string>
 
     <!--  Profile Page  -->
     <string name="profile_page_title">Profil</string>

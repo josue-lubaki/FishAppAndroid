@@ -9,11 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
+import ca.josue.fishapp.fragment.FishDetailsFragment
 import ca.josue.fishapp.model.FishModel
 import com.bumptech.glide.Glide
 
 class FishAdapter(
-        private val context: MainActivity,
+        val context: MainActivity,
         private val fishList : List<FishModel>,
         private val layoutId : Int
         ) : RecyclerView.Adapter<FishAdapter.ViewHolder>(){
@@ -35,6 +36,12 @@ class FishAdapter(
         Glide.with(context).load(Uri.parse(currentFish.imageUrl)).into(holder.fishImage)
         holder.fishName.text = currentFish.name
         holder.fishPrice.text = "$${currentFish.price}"
+
+        // Intéragir lors du click sur l'image d'un poisson et afficher le popup
+        holder.itemView.setOnClickListener {
+            FishDetailsFragment(this, currentFish).show()
+        }
+
     }
 
     override fun getItemCount(): Int = fishList.size
