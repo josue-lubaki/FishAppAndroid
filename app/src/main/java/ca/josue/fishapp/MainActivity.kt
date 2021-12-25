@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnShowListener
                 }
                 3 -> {
-                    loadFragment(HomeFragment(this), R.string.profile_page_title)
+                    loadFragment(ProfileFragment(this), R.string.profile_page_title)
                     Log.i(LOG_TAG, "show Profil.class")
                     return@setOnShowListener
                 }

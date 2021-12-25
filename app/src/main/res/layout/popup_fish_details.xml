@@ -64,9 +64,11 @@
             android:id="@+id/commande_detail_description"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="@dimen/item_margin"
-            android:padding="@dimen/item_margin"
+            android:layout_weight="1.2"
+            android:layout_margin="@dimen/small_size"
+            android:paddingHorizontal="@dimen/little_size"
+            android:ellipsize="end"
+            android:maxLines="6"
             android:text="@string/commande_detail_page_description"
             style="@style/DefaultTextStyle"
             />
@@ -79,6 +81,7 @@
             android:background="@drawable/corner_round"
             android:layout_gravity="center"
             android:layout_margin="@dimen/item_margin"
+            android:layout_marginBottom="@dimen/item_margin"
             />
 
     </LinearLayout>

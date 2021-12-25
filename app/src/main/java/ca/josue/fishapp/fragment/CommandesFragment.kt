@@ -26,7 +26,7 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
         val user = UserModel(
                 "616de5c0c4da77001dab5a3d",
                 "616de5c0c4da77001dab5a3d",
-                "Lubaki Freddy"
+                "La Tulipe"
         )
         commandeList.add(CommandeModel(
                 0,
