@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/horizontal_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="horizontal"
+        tools:listitem="@layout/item_horizontal_article"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
+    <View
+        android:layout_width="60dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/darkRed"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_page_produit"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/item_margin"
+        android:layout_marginStart="@dimen/item_margin"
+        style="@style/SubtitleTextStyle"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vertical_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/item_margin"
+        android:orientation="vertical"
+        tools:listitem="@layout/item_vertical_article"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+</LinearLayout>

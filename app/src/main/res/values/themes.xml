@@ -31,15 +31,32 @@
         <item name="android:fontFamily">@font/poppins_bold</item>
     </style>
 
-    <style name="ColorYellow">
-        <item name="background">@color/darkYellow</item>
+    <style name="ColorYellowBackground">
+        <item name="android:background">@color/darkYellow</item>
     </style>
 
-    <style name="ColorDark">
-        <item name="background">@color/dark</item>
+    <style name="ColorYellowText">
+        <item name="android:textColor">@color/darkYellow</item>
     </style>
 
-    <style name="ColorLightBlue">
-        <item name="background">@color/lightBlue</item>
+    <style name="ColorDarkBackground">
+        <item name="android:background">@color/dark</item>
     </style>
+
+    <style name="ColorDarkText">
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
+    <style name="ColorLightBlueBackground">
+        <item name="android:background">@color/lightBlue</item>
+    </style>
+
+    <style name="ColorBlueText">
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="ColorDarkRedText">
+        <item name="android:textColor">@color/darkRed</item>
+    </style>
+
 </resources>
