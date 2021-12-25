@@ -5,7 +5,7 @@
     <string name="home_page_vedette">En Vedette</string>
     <string name="home_page_produit">Nos Produits</string>
     <string name="home_page_title_article">Titre Article</string>
-    <string name="home_page_add_cart">Ajouter au panier</string>
+    <string name="home_page_consulte">Consulter</string>
     <string name="home_page_price">$120</string>
 
     <!--  Commande Page  -->

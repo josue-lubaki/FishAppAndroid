@@ -15,27 +15,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@color/lightBlue"
+            android:background="@color/blue"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/item_margin">
+
+                <TextView
+                    android:id="@+id/page_title"
+                    style="@style/SubtitleTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_page_vedette"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
+                    android:id="@+id/imageView"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:src="@drawable/original"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/page_title_app"
+                    style="@style/TitleTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@color/darkYellow"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -48,20 +75,12 @@
        android:background="@color/blue"
        android:layout_weight="1"
        >
-       <TextView
-           android:id="@+id/page_title"
-           style="@style/TitleTextStyle"
-           android:layout_width="wrap_content"
-           android:layout_height="40dp"
-           android:text="@string/home_page_vedette"
-           android:layout_marginTop="@dimen/item_margin"
-           android:layout_marginStart="@dimen/default_margin" />
 
        <FrameLayout
            android:id="@+id/fragment_container"
            android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="2"
+           android:layout_height="match_parent"
+           android:layout_marginBottom="@dimen/item_margin"
            />
    </LinearLayout>
 

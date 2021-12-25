@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.adapter.FishAdapter
+import ca.josue.fishapp.adapter.FishItemDecoration
 import ca.josue.fishapp.model.FishModel
 
 class HomeFragment(private val context : MainActivity): Fragment() {
@@ -57,6 +58,7 @@ class HomeFragment(private val context : MainActivity): Fragment() {
         // Retrieve Vertical RecyclerView
         val verticalRecyclerView : RecyclerView = view.findViewById(R.id.vertical_recyclerview)
         verticalRecyclerView.adapter = FishAdapter(context, fishList, R.layout.item_vertical_article)
+        verticalRecyclerView.addItemDecoration(FishItemDecoration())
 
         return view
     }

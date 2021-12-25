@@ -9,24 +9,25 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/horizontal_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:orientation="horizontal"
         tools:listitem="@layout/item_horizontal_article"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
     <View
-        android:layout_width="60dp"
+        android:layout_width="360dp"
         android:layout_height="2dp"
         android:layout_marginTop="5dp"
-        android:background="@color/darkRed"/>
+        android:layout_gravity="center"
+        android:background="@color/white"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_page_produit"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginBottom="@dimen/item_margin"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/small_size"
         android:layout_marginStart="@dimen/item_margin"
         style="@style/SubtitleTextStyle"
         />

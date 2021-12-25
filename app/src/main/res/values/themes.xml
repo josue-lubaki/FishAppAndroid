@@ -17,12 +17,12 @@
     <!--  Créer les composants pour le titre par défault  -->
     <style name="DefaultTextStyle">
         <item name="android:textColor">@color/dark</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
     <style name="SubtitleTextStyle" parent="DefaultTextStyle">
-        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:textColor">@color/gray</item>
         <item name="android:fontFamily">@font/poppins_semibold</item>
     </style>
 
