@@ -53,6 +53,7 @@
         style="@style/SubtitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/medium_size"
         android:text="@string/home_page_title_article"
         android:layout_marginEnd="@dimen/default_margin"
         android:textColor="@color/dark"
@@ -76,12 +77,14 @@
         app:layout_constraintStart_toEndOf="@+id/view_separationH"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <TextView
+        android:id="@+id/home_page_consult_btn"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:padding="@dimen/default_margin"
+        android:layout_height="45dp"
+        android:paddingHorizontal="@dimen/item_margin"
         android:text="@string/home_page_consulte"
-        android:textSize="10sp"
+        android:textSize="16sp"
+        android:gravity="center"
         android:textColor="@color/white"
         android:layout_marginBottom="@dimen/item_margin"
         android:background="@drawable/corner_round"

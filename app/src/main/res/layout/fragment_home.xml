@@ -36,7 +36,7 @@
         android:id="@+id/vertical_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/item_margin"
+        android:layout_marginHorizontal="@dimen/item_margin"
         android:orientation="vertical"
         tools:listitem="@layout/item_vertical_article"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

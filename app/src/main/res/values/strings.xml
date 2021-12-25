@@ -9,7 +9,7 @@
     <string name="home_page_price">$120</string>
 
     <!--  Commande Page  -->
-    <string name="commande_page_title">Mes Commandes</string>
+    <string name="commande_page_title">Mes Achats</string>
     <string name="commande_page_title_article">@string/home_page_title_article</string>
     <string name="commande_page_see_details">Voir Details</string>
     <string name="commande_page_price">@string/home_page_price</string>

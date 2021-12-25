@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightBlue"
+    android:background="@color/darkGray"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
@@ -32,13 +32,14 @@
 
                 <TextView
                     android:id="@+id/page_title"
-                    style="@style/SubtitleTextStyle"
+                    style="@style/TitleTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/home_page_vedette"
+                    android:textSize="@dimen/medium_size"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
@@ -46,6 +47,7 @@
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:src="@drawable/original"
+                    android:scaleType="fitCenter"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -61,8 +63,8 @@
                     android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -88,12 +90,12 @@
         android:id="@+id/navBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mbn_circleColor="#F0CA69"
-        app:mbn_selectedIconColor="@color/blue"
+        app:mbn_circleColor="@color/black"
+        app:mbn_selectedIconColor="@color/yellow"
         app:mbn_countTextColor="@color/white"
         app:mbn_countBackgroundColor="@color/darkRed"
-        app:mbn_defaultIconColor="@color/white"
-        app:mbn_backgroundBottomColor="@color/dark"
+        app:mbn_defaultIconColor="@color/lightBlue"
+        app:mbn_backgroundBottomColor="@color/blue"
         app:menu = "@menu/main"/>
 
 </LinearLayout>

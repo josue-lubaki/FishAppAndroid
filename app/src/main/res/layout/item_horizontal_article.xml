@@ -29,6 +29,8 @@
             android:layout_height="0dp"
             android:layout_weight="0.6"
             android:ellipsize="end"
+            android:textSize="@dimen/medium_size"
+            android:layout_marginTop="@dimen/item_margin"
             android:text="@string/home_page_title_article"
             android:textColor="@color/dark"
             android:gravity="center"
@@ -45,6 +47,14 @@
             android:text="@string/home_page_price"
             android:gravity="center"
             style="@style/ColorDarkRedText"/>
+
+        <TextView
+            android:id="@+id/home_page_consult_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+
 
     </LinearLayout>
 
