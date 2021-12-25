@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnShowListener
                 }
                 2 -> {
-                    loadFragment(HomeFragment(this), R.string.commande_detail_page_title)
+                    loadFragment(CommandesFragment(this), R.string.commande_detail_page_title)
                     Log.i(LOG_TAG, "show commandes.class")
                     return@setOnShowListener
                 }

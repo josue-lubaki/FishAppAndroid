@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
@@ -19,6 +20,8 @@ class FishAdapter(
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         val fishImage : ImageView = view.findViewById(R.id.home_page_image_article)
+        val fishName : TextView = view.findViewById(R.id.home_page_title_article)
+        val fishPrice : TextView = view.findViewById(R.id.home_page_price)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,6 +33,8 @@ class FishAdapter(
         val currentFish = fishList[position]
 
         Glide.with(context).load(Uri.parse(currentFish.imageUrl)).into(holder.fishImage)
+        holder.fishName.text = currentFish.name
+        holder.fishPrice.text = "$${currentFish.price}"
     }
 
     override fun getItemCount(): Int = fishList.size

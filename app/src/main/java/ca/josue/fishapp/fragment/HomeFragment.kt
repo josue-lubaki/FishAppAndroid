@@ -14,12 +14,11 @@ import ca.josue.fishapp.model.FishModel
 
 class HomeFragment(private val context : MainActivity): Fragment() {
 
-
+    private val fishList = arrayListOf<FishModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater.inflate(R.layout.fragment_home, container, false)
 
-        val fishList = arrayListOf<FishModel>()
         fishList.add(FishModel(
                 "Mpiodi",
                 "poisson_gris",
