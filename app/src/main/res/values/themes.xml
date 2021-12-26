@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <!--  Créer les composants pour le titre par défault  -->
@@ -57,6 +58,10 @@
 
     <style name="ColorDarkRedText">
         <item name="android:textColor">@color/darkRed</item>
+    </style>
+
+    <style name="GeneralNoTitle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:windowNoTitle">true</item>
     </style>
 
 </resources>

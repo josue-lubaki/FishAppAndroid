@@ -2,7 +2,9 @@ package ca.josue.fishapp
 
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ca.josue.fishapp.fragment.CommandesFragment
@@ -15,7 +17,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val navBar = findViewById<MeowBottomNavigation>(R.id.navBar)
+        supportActionBar?.hide()
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         // add menu item
         navBar.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
@@ -54,7 +59,7 @@ class MainActivity : AppCompatActivity() {
      * @param fragment le fragment à replacer
      * @param titlePage l'identifiant de la textView qui fait reference au nom de la page
      * */
-    private fun loadFragment(fragment: Fragment, titlePage : Int) {
+    private fun loadFragment(fragment: Fragment, titlePage: Int) {
 
         // actualiser le titre de la page
         findViewById<TextView>(R.id.page_title).text = resources.getString(titlePage)
