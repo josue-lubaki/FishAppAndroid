@@ -1,5 +1,6 @@
 package ca.josue.fishapp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import ca.josue.fishapp.BaseApplication.Companion.EMAIL
 import ca.josue.fishapp.BaseApplication.Companion.ID_USER_CURRENT
 import ca.josue.fishapp.BaseApplication.Companion.PASSWORD
 import ca.josue.fishapp.BaseApplication.Companion.TOKEN
+import ca.josue.fishapp.Login
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.adapter.CommandeAdapter
@@ -47,48 +49,29 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
             commandesRecyclerView.layoutManager = LinearLayoutManager(context)
             commandesRecyclerView.addItemDecoration(FishItemDecoration())
         }
-        println("Valeur de ID_USER : $ID_USER_CURRENT" )
-        val user = UserDTO("josuelubaki@gmail.com","Heroes")
-        val loginBtn : Button = view.findViewById(R.id.ask_login_btn)
 
-        loginBtn.setOnClickListener { v ->
-            // Login user
-            getLoginUser(user, v)
+        // Vérifier l'utilisateur est déjà connecté
+        if(ID_USER_CURRENT != null){
+            getCommandesUser(view)
+        }else{
+            val loginBtn : Button = view.findViewById(R.id.ask_login_btn)
+
+            loginBtn.setOnClickListener { v ->
+                // Si l'Utilisateur n'est pas encore connecté
+                if(ID_USER_CURRENT == null) {
+                    val intent = Intent(context.baseContext, Login::class.java)
+                    startActivity(intent)
+                    context.finish()
+                }
+                else{
+                    // retrieve All commands for user
+                    getCommandesUser(v)
+                }
+            }
         }
     }
 
-    /***
-     * Methode qui permet de logger un Utilisateur
-     * @param user les informations servant de connexion (i.e: email and password)
-     */
-    private fun getLoginUser(user: UserDTO, view: View) {
-        API.getApi()
-                ?.create(ApiInterface::class.java)
-                ?.login(user)
-                ?.enqueue(object : Callback<MyLogin?> {
-                    override fun onResponse(call: Call<MyLogin?>, response: Response<MyLogin?>) {
-                        if(!response.isSuccessful)
-                            return
-                        val responseLogin = response.body()!!
 
-                        // Setter l'ID de l'utilisateur courant
-                        ID_USER_CURRENT = responseLogin.id
-                        TOKEN = responseLogin.token
-                        EMAIL = responseLogin.email
-                        PASSWORD = user.password
-
-                        println("Je viens de me logger avec succès")
-                        println("Voici à present l'id : $ID_USER_CURRENT")
-                        if(ID_USER_CURRENT != null){
-                            getCommandesUser(view)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<MyLogin?>, t: Throwable) {
-                        println("Erreur lors de Login : ${t.message}")
-                    }
-                })
-    }
 
     /***
      * Methode qui permet de récupèrer toutes les commandes en cours de l'Utilisateur connecté

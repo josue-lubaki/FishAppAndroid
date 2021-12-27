@@ -78,7 +78,8 @@
             android:layout_marginTop="@dimen/default_margin" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
+    <Button
+        android:id="@+id/connect_btn"
         android:layout_width="140dp"
         android:layout_height="55dp"
         android:background="@drawable/corner_yellow"
