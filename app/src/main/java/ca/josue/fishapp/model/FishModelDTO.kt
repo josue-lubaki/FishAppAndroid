@@ -1,6 +1,6 @@
 package ca.josue.fishapp.model
 
-class FishModel(
+class FishModelDTO(
         val name : String  = "poisson",
         val category : String = "poisson rouge",
         val price : Int = 10,

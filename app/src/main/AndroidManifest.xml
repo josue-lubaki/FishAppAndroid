@@ -15,9 +15,9 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Login" />
         <activity
-            android:name=".Splash"
+            android:name=".MainActivity"
             android:theme="@style/GeneralNoTitle" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package ca.josue.fishapp.`interface`
+package ca.josue.fishapp.services
 
 import ca.josue.fishapp.model.Product
 import retrofit2.Call

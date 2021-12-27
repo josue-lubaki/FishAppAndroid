@@ -11,8 +11,7 @@ import ca.josue.fishapp.R
 class ProfileFragment(private val context : MainActivity) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.profile_fragment, container, false)
-        return view
+        return inflater.inflate(R.layout.profile_fragment, container, false)
     }
 
 }

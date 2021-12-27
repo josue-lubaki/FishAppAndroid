@@ -5,7 +5,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import ca.josue.fishapp.services.API
+import ca.josue.fishapp.services.ApiInterface
+import ca.josue.fishapp.fragment.HomeFragment
+import ca.josue.fishapp.model.FishModelDTO
+import ca.josue.fishapp.model.Product
 import com.google.android.material.progressindicator.LinearProgressIndicator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class Splash : AppCompatActivity() {
     private lateinit var myProgress: LinearProgressIndicator
@@ -19,6 +27,9 @@ class Splash : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         myProgress = findViewById(R.id.myProgressBar)
         Thread {
+            // retrieve all Products
+            getAllProductsViaAPI()
+
             while (pStatus < 100) {
                 pStatus += 1
                 handler.post { myProgress.progress = pStatus }
@@ -36,5 +47,34 @@ class Splash : AppCompatActivity() {
                 finish()
             }
         }.start()
+    }
+
+    /**
+     * Methode qui permet de récupèrer tous les produits
+     * */
+    private fun getAllProductsViaAPI() {
+        val retrofitProduct = API.getApi()?.create(ApiInterface::class.java)?.getProducts()
+        retrofitProduct?.enqueue(object : Callback<List<Product>?> {
+            override fun onResponse(call: Call<List<Product>?>, response: Response<List<Product>?>) {
+                if (!response.isSuccessful)
+                    return
+
+                val responseBody = response.body()!!
+                for (product in responseBody){
+                    val prod = FishModelDTO(
+                            product.name,
+                            product.category.name,
+                            product.price,
+                            product.image,
+                            product.description
+                    )
+                    HomeFragment.fishListProduct.add(prod)
+                }
+            }
+
+            override fun onFailure(call: Call<List<Product>?>, t: Throwable) {
+                println("Error retrofit ${t.message}")
+            }
+        })
     }
 }

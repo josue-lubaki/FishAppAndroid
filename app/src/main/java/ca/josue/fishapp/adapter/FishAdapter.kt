@@ -1,23 +1,21 @@
 package ca.josue.fishapp.adapter
 
 import android.net.Uri
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.fragment.FishDetailsFragment
-import ca.josue.fishapp.model.FishModel
+import ca.josue.fishapp.model.FishModelDTO
 import com.bumptech.glide.Glide
 
 class FishAdapter(
         val context: MainActivity,
-        private val fishList : List<FishModel>,
+        private val fishListDTO : List<FishModelDTO>,
         private val layoutId : Int
         ) : RecyclerView.Adapter<FishAdapter.ViewHolder>(){
 
@@ -34,7 +32,7 @@ class FishAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentFish = fishList[position]
+        val currentFish = fishListDTO[position]
 
         Glide.with(context).load(Uri.parse(currentFish.imageUrl)).into(holder.fishImage)
         holder.fishName.text = currentFish.name
@@ -50,5 +48,5 @@ class FishAdapter(
         }
     }
 
-    override fun getItemCount(): Int = fishList.size
+    override fun getItemCount(): Int = fishListDTO.size
 }

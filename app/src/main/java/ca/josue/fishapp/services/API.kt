@@ -1,14 +1,13 @@
-package ca.josue.fishapp.`interface`
+package ca.josue.fishapp.services
 
 import ca.josue.fishapp.BaseApplication
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class API {
     companion object{
-        var api: Retrofit? = null
+        private var api: Retrofit? = null
 
         @JvmName("getApiFish")
         fun getApi(): Retrofit? {

@@ -53,12 +53,12 @@
         style="@style/SubtitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/medium_size"
+        android:textSize="@dimen/little_size"
         android:text="@string/home_page_title_article"
         android:layout_marginEnd="@dimen/default_margin"
         android:textColor="@color/dark"
         app:layout_constraintBottom_toBottomOf="@+id/view_separationH"
-        app:layout_constraintEnd_toStartOf="@+id/view_separation"
+        app:layout_constraintEnd_toStartOf="@+id/home_page_price"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="parent" />
 
