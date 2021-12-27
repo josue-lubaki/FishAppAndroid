@@ -4,66 +4,75 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
+import ca.josue.fishapp.`interface`.API
+import ca.josue.fishapp.`interface`.ApiInterface
 import ca.josue.fishapp.adapter.FishAdapter
 import ca.josue.fishapp.adapter.FishItemDecoration
 import ca.josue.fishapp.model.FishModel
+import ca.josue.fishapp.model.Product
+import ca.josue.fishapp.myAPI
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment(private val context : MainActivity): Fragment() {
 
-    private val fishList = arrayListOf<FishModel>()
+    companion object{
+        private val fishListProduct = arrayListOf<FishModel>()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater.inflate(R.layout.fragment_home, container, false)
-
-        fishList.add(FishModel(
-                "Mpiodi",
-                "poisson_gris",
-                20,
-                "https://cdn.pixabay.com/photo/2016/11/29/09/43/koi-fish-1868779_960_720.jpg",
-                "Le poisson salé est un poisson qui a subi une salaison dans un but de conservation.\n"
-        ))
-
-        fishList.add(FishModel(
-                "RichardFish",
-                "poisson_bleu",
-                25,
-                "https://cdn.pixabay.com/photo/2012/03/03/23/54/animal-21668_960_720.jpg",
-                "Utilisée surtout pour faire de la brandade ou en portugais Bacalhau, cette morue de Nouvelle-Écosse se présente en filet, sans peau et sans arrêtes. Elle doit être dessalée pendant 12 à 24 heures, dépendamment de la fréquence du changement de l'eau."
-        ))
-
-        fishList.add(FishModel(
-                "Saumon",
-                "poisson_jaune",
-                45,
-                "https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_960_720.jpg",
-                "Le saumon est un poisson de mer de la famille des Salmonidés. Avec 5 espèces vivant dans le Pacifique et 1 dans l'Atlantique, le saumon se présente avec un dos bleuté parsemé de taches noires, des flancs et un abdomen dorés. Au corps allongé recouvert d'écailles lisses, ce poisson peut mesurer 90 cm et peser 15 kg."
-        ))
-
-
-        fishList.add(FishModel(
-                "Capitaine",
-                "poisson_vert",
-                55,
-                "https://cdn.pixabay.com/photo/2018/04/15/17/45/fish-3322230_960_720.jpg",
-                "Le capitaine (Polydactylus quadrifilis), aussi appelé Gros capitaine pour le distinguer des autres capitaines, notamment du Petit capitaine (Galeoides decadactylus), est un poisson de la famille des Polynemidae. Le capitaine est un poisson à chair blanche et fine. Il se cuisine comme le bar."
-        ))
-
-
-
-        // Retrieve RecyclerView Horizontal
-        val horizontalRecyclerView : RecyclerView = view.findViewById(R.id.horizontal_recyclerview)
-        horizontalRecyclerView.adapter = FishAdapter(context, fishList, R.layout.item_horizontal_article)
-
-        // Retrieve Vertical RecyclerView
-        val verticalRecyclerView : RecyclerView = view.findViewById(R.id.vertical_recyclerview)
-        verticalRecyclerView.adapter = FishAdapter(context, fishList, R.layout.item_vertical_article)
-        verticalRecyclerView.addItemDecoration(FishItemDecoration())
-
+        getMyData()
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        println("La liste n'est pas vide ${fishListProduct.size}")
+
+        // Retrieve RecyclerView Horizontal
+        val horizontalRecyclerView : RecyclerView = view.findViewById(R.id.horizontal_recyclerview)
+        horizontalRecyclerView.adapter = FishAdapter(context, fishListProduct, R.layout.item_horizontal_article)
+
+        // Retrieve Vertical RecyclerView
+        val verticalRecyclerView : RecyclerView = view.findViewById(R.id.vertical_recyclerview)
+        verticalRecyclerView.adapter = FishAdapter(context, fishListProduct, R.layout.item_vertical_article)
+        verticalRecyclerView.addItemDecoration(FishItemDecoration())
+
+    }
+
+    private fun getMyData() {
+        val retrofitProduct = API.getApi()?.create(ApiInterface::class.java)?.getProducts()
+        //val retrofitProduct = myAPI.getApi().create(ApiInterface::class.java).getProducts()
+        retrofitProduct?.enqueue(object : Callback<List<Product>?> {
+            override fun onResponse(call: Call<List<Product>?>, response: Response<List<Product>?>) {
+                if (!response.isSuccessful)
+                    return
+
+                val responseBody = response.body()!!
+                for (product in responseBody){
+                    val prod = FishModel(
+                            product.name,
+                            product.category.name,
+                            product.price,
+                            product.image,
+                            product.description
+                    )
+                    fishListProduct.add(prod)
+                }
+            }
+
+            override fun onFailure(call: Call<List<Product>?>, t: Throwable) {
+                println("Error retrofit ${t.message}")
+            }
+        })
+    }
 }

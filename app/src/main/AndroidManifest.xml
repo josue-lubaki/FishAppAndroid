@@ -13,11 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FishApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Splash" />
+        <activity android:name=".Login" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Splash"
             android:theme="@style/GeneralNoTitle" />
-        <activity android:name=".Login">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
