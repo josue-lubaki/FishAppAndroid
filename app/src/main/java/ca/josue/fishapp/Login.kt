@@ -30,6 +30,7 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        supportActionBar?.hide()
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         // récupèration des components
@@ -53,7 +54,7 @@ class Login : AppCompatActivity() {
             }
         }
 
-        val connectBtn : Button = findViewById(R.id.connect_btn)
+        val connectBtn : TextView = findViewById(R.id.connect_btn)
         connectBtn.setOnClickListener {
 
             // Vérifier les inputs de l'utilisateur
