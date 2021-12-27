@@ -19,23 +19,27 @@ class HomeFragment(private val context : MainActivity): Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view =  inflater.inflate(R.layout.fragment_home, container, false)
+        val view =  if(fishListProduct.isNotEmpty()){
+            inflater.inflate(R.layout.fragment_home, container, false)
+        }else{
+            inflater.inflate(R.layout.fragment_home_empty, container, false)
+        }
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Retrieve RecyclerView Horizontal
-        val horizontalRecyclerView : RecyclerView = view.findViewById(R.id.horizontal_recyclerview)
-        horizontalRecyclerView.adapter = FishAdapter(context, fishListProduct, R.layout.item_horizontal_article)
+        if(fishListProduct.isNotEmpty()) {
+            // Retrieve RecyclerView Horizontal
+            val horizontalRecyclerView: RecyclerView = view.findViewById(R.id.horizontal_recyclerview)
+            horizontalRecyclerView.adapter = FishAdapter(context, fishListProduct, R.layout.item_horizontal_article)
 
-        // Retrieve Vertical RecyclerView
-        val verticalRecyclerView : RecyclerView = view.findViewById(R.id.vertical_recyclerview)
-        verticalRecyclerView.adapter = FishAdapter(context, fishListProduct, R.layout.item_vertical_article)
-        verticalRecyclerView.addItemDecoration(FishItemDecoration())
-
+            // Retrieve Vertical RecyclerView
+            val verticalRecyclerView: RecyclerView = view.findViewById(R.id.vertical_recyclerview)
+            verticalRecyclerView.adapter = FishAdapter(context, fishListProduct, R.layout.item_vertical_article)
+            verticalRecyclerView.addItemDecoration(FishItemDecoration())
+        }
     }
-
-
 }
