@@ -35,7 +35,7 @@ class Splash : AppCompatActivity() {
                 handler.post { myProgress.progress = pStatus }
                 try {
                     // Just to display the progress slowly
-                    Thread.sleep(25)
+                    Thread.sleep(50)
                 } catch (e: InterruptedException) {
                     e.printStackTrace()
                 }

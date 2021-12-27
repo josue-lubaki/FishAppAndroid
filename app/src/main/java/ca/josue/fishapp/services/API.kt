@@ -18,10 +18,8 @@ class API {
                         .addConverterFactory(GsonConverterFactory.create(gson))
                         .baseUrl(BaseApplication.BASE_URL)
                         .build()
-
             }
             return api
         }
-
     }
 }

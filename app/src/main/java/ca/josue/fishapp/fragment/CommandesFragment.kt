@@ -17,41 +17,47 @@ import ca.josue.fishapp.model.UserModel
 class CommandesFragment(private val context : MainActivity) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-       val view  = inflater.inflate(R.layout.commandes_fragment, container, false)
 
-        val commandeList = arrayListOf<CommandeModel>()
-        val orderItem = arrayListOf<String>()
-        orderItem.add("61785b87e5cdff001d816474")
+       val commandeList = arrayListOf<CommandeModel>()
+//        val orderItem = arrayListOf<String>()
+//        orderItem.add("61785b87e5cdff001d816474")
+//
+//        val user = UserModel(
+//                "616de5c0c4da77001dab5a3d",
+//                "616de5c0c4da77001dab5a3d",
+//                "La Tulipe"
+//        )
+//        commandeList.add(CommandeModel(
+//                0,
+//                "61785b87e5cdff001d816478",
+//                "1",
+//                "De la Paix",
+//                "Kinshasa",
+//                "Mont-Ngafula",
+//                "CD",
+//                "2021-10-26T19:48:23.020Z",
+//                "61785b87e5cdff001d816478",
+//                "Aucune note",
+//                orderItem,
+//                "2021-10-26T19:48:23.020Z",
+//                "61785b87e5cdff001d816478",
+//                "1",
+//                120,
+//                user
+//        ))
 
-        val user = UserModel(
-                "616de5c0c4da77001dab5a3d",
-                "616de5c0c4da77001dab5a3d",
-                "La Tulipe"
-        )
-        commandeList.add(CommandeModel(
-                0,
-                "61785b87e5cdff001d816478",
-                "1",
-                "De la Paix",
-                "Kinshasa",
-                "Mont-Ngafula",
-                "CD",
-                "2021-10-26T19:48:23.020Z",
-                "61785b87e5cdff001d816478",
-                "Aucune note",
-                orderItem,
-                "2021-10-26T19:48:23.020Z",
-                "61785b87e5cdff001d816478",
-                "1",
-                120,
-                user
-        ))
+        val view  = if(commandeList.isNotEmpty())
+            inflater.inflate(R.layout.commandes_fragment, container, false)
+        else
+            inflater.inflate(R.layout.commandes_fragment_empty, container, false)
 
-        // Retrieve Vertical RecyclerView
-        val commandesRecyclerView : RecyclerView = view.findViewById(R.id.vertical_recyclerview_commandes)
-        commandesRecyclerView.adapter = CommandeAdapter(context, commandeList)
-        commandesRecyclerView.layoutManager = LinearLayoutManager(context)
-        commandesRecyclerView.addItemDecoration(FishItemDecoration())
+        if(commandeList.isNotEmpty()) {
+            // Retrieve Vertical RecyclerView
+            val commandesRecyclerView: RecyclerView = view.findViewById(R.id.vertical_recyclerview_commandes)
+            commandesRecyclerView.adapter = CommandeAdapter(context, commandeList)
+            commandesRecyclerView.layoutManager = LinearLayoutManager(context)
+            commandesRecyclerView.addItemDecoration(FishItemDecoration())
+        }
 
         return view
     }
