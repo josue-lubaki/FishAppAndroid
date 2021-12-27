@@ -133,7 +133,7 @@
         app:layout_constraintStart_toStartOf="@+id/profile_adresse_input"
         app:layout_constraintTop_toTopOf="@+id/profile_page_telephone" />
 
-    <Button
+    <TextView
         android:id="@+id/deconnexion_btn"
         android:layout_width="140dp"
         android:layout_height="55dp"
@@ -143,8 +143,9 @@
         android:text="@string/profile_page_deconnexion"
         android:textColor="@color/white"
         android:textSize="@dimen/medium_size"
-        android:textStyle="bold"
         android:elevation="@dimen/small_size"
+        android:textStyle="bold"
+        style="@style/Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

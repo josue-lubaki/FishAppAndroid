@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import ca.josue.fishapp.BaseApplication.Companion.EMAIL
 import ca.josue.fishapp.fragment.CommandesFragment
 import ca.josue.fishapp.model.MyLogin
 import ca.josue.fishapp.model.UserDTO
@@ -106,7 +107,7 @@ class Login : AppCompatActivity() {
                         // Setter l'ID de l'utilisateur courant
                         BaseApplication.ID_USER_CURRENT = responseLogin.id
                         BaseApplication.TOKEN = responseLogin.token
-                        BaseApplication.EMAIL = responseLogin.email
+                        EMAIL = responseLogin.email
                         BaseApplication.PASSWORD = user.password
 
                         println("Voici à present l'id : ${BaseApplication.ID_USER_CURRENT}")
@@ -114,6 +115,8 @@ class Login : AppCompatActivity() {
                         // Récupèration des commandes
                         CommandesFragment.commandeList.clear()
                         CommandesFragment.getCommandesUser()
+
+                        // Sauvergarder son email
 
                         if(BaseApplication.ID_USER_CURRENT != null){
                             val intent = Intent(this@Login, MainActivity::class.java)

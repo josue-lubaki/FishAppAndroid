@@ -17,17 +17,19 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/secure_login" />
 
-    <Button
+    <TextView
         android:id="@+id/ask_login_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
         android:background="@drawable/corner_green"
         android:padding="@dimen/little_size"
         android:text="@string/login"
         android:textColor="@color/white"
         android:clickable="true"
         android:textSize="@dimen/medium_size"
+        android:gravity="center"
         android:textStyle="bold"
+        style="@style/Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/animationView" />

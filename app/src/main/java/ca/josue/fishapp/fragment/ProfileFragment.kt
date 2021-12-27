@@ -11,6 +11,7 @@ import ca.josue.fishapp.BaseApplication
 import ca.josue.fishapp.BaseApplication.Companion.APARTEMENT
 import ca.josue.fishapp.BaseApplication.Companion.AVENUE
 import ca.josue.fishapp.BaseApplication.Companion.BASE_URL
+import ca.josue.fishapp.BaseApplication.Companion.EMAIL
 import ca.josue.fishapp.BaseApplication.Companion.PHONE
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.MainActivity.Companion.navBar
@@ -30,12 +31,13 @@ class ProfileFragment(private val context : MainActivity) : Fragment() {
         val emailInput : TextView = view.findViewById(R.id.profile_email_input)
         val adresse : TextView = view.findViewById(R.id.profile_adresse_input)
         val telephoneInput : TextView = view.findViewById(R.id.profile_telephone_input)
-        val deconnexionBtn : Button = view.findViewById(R.id.deconnexion_btn)
+        val deconnexionBtn : TextView = view.findViewById(R.id.deconnexion_btn)
 
         // Setter les informations dont nous disposons déjà
-        if(PHONE != null && APARTEMENT != null && AVENUE != null) {
+        if(PHONE != null && APARTEMENT != null && AVENUE != null && EMAIL != null) {
             telephoneInput.text = PHONE.toString()
             adresse.text = "$APARTEMENT $AVENUE"
+            emailInput.text = EMAIL.toString()
         }
 
         // deconnexion
