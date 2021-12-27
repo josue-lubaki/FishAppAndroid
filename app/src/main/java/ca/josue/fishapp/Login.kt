@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import ca.josue.fishapp.fragment.CommandesFragment
 import ca.josue.fishapp.model.MyLogin
 import ca.josue.fishapp.model.UserDTO
 import ca.josue.fishapp.services.API
@@ -20,10 +21,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Login : AppCompatActivity() {
-
-    companion object{
-        const val GOTO_COMMANDES  = "GOTO_COMMANDES_TRUE"
-    }
+//
+//    companion object{
+//        const val GOTO_COMMANDES  = "GOTO_COMMANDES_TRUE"
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,9 +110,13 @@ class Login : AppCompatActivity() {
                         BaseApplication.PASSWORD = user.password
 
                         println("Voici à present l'id : ${BaseApplication.ID_USER_CURRENT}")
+
+                        // Récupèration des commandes
+                        CommandesFragment.commandeList.clear()
+                        CommandesFragment.getCommandesUser()
+
                         if(BaseApplication.ID_USER_CURRENT != null){
                             val intent = Intent(this@Login, MainActivity::class.java)
-                            intent.putExtra(GOTO_COMMANDES, true)
                             startActivity(intent)
                             finish()
                         }

@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.TextView
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import ca.josue.fishapp.Login.Companion.GOTO_COMMANDES
 import ca.josue.fishapp.fragment.CommandesFragment
 import ca.josue.fishapp.fragment.HomeFragment
 import ca.josue.fishapp.fragment.ProfileFragment
@@ -16,16 +14,20 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 class MainActivity : AppCompatActivity() {
     private val LOG_TAG = MainActivity::class.java.name
 
+    companion object{
+        lateinit var navBar : MeowBottomNavigation
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // get content bundle
-        val bundle = intent.extras
+//        val bundle = intent.extras
+//
+//        var goToCommandeFragment = bundle?.getBoolean(GOTO_COMMANDES)
 
-        val goToCommandeFragment = bundle?.getBoolean(GOTO_COMMANDES)
-
-        val navBar = findViewById<MeowBottomNavigation>(R.id.navBar)
+        navBar = findViewById(R.id.navBar)
         supportActionBar?.hide()
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
@@ -52,13 +54,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+//
+//        if(goToCommandeFragment != null && goToCommandeFragment){
+//            bundle?.clear()
+//            navBar.show(2,true)
+//        }else{
+//            // Le Fragment qui s'affiche par Default
+//            navBar.show(1, true)
+//        }
 
-        if(goToCommandeFragment != null && goToCommandeFragment){
-            navBar.show(2,true)
-        }else{
-            // Le Fragment qui s'affiche par Default
-            navBar.show(1, true)
-        }
+        navBar.show(1, true)
+
 
         // pour éviter les erreurs
         navBar.setOnClickMenuListener { }

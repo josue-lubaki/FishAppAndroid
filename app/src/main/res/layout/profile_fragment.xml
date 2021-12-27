@@ -133,7 +133,8 @@
         app:layout_constraintStart_toStartOf="@+id/profile_adresse_input"
         app:layout_constraintTop_toTopOf="@+id/profile_page_telephone" />
 
-    <TextView
+    <Button
+        android:id="@+id/deconnexion_btn"
         android:layout_width="140dp"
         android:layout_height="55dp"
         android:background="@drawable/corner_round"

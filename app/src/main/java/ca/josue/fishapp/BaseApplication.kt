@@ -8,5 +8,8 @@ class BaseApplication(
         var TOKEN : String? = null
         var EMAIL : String? = null
         var PASSWORD : String ? = null
+        var PHONE : String? = null
+        var APARTEMENT : String? = null
+        var AVENUE : String? = null
     }
 }
