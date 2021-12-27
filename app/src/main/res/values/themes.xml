@@ -25,6 +25,7 @@
     <style name="SubtitleTextStyle" parent="DefaultTextStyle">
         <item name="android:textColor">@color/gray</item>
         <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">17sp</item>
     </style>
 
     <style name="TitleTextStyle" parent="SubtitleTextStyle">

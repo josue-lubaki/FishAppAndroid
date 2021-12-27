@@ -48,7 +48,6 @@
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:paddingEnd="@dimen/default_margin"
                 android:text="@string/commande_detail_page_price"
                 android:textColor="@color/darkRed"
                 android:textSize="@dimen/default_margin"

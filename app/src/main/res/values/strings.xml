@@ -37,5 +37,8 @@
     <string name="profile_page_adresse_client">Adressedi client</string>
     <string name="profile_page_email_client">Email du Client</string>
     <string name="profile_page_name_client">Nom du Client</string>
+    <string name="email">Email</string>
+    <string name="profile_page_connexion">Connexion</string>
+    <string name="password">password</string>
 
 </resources>
