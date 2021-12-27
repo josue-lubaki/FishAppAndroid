@@ -40,5 +40,6 @@
     <string name="email">Email</string>
     <string name="profile_page_connexion">Connexion</string>
     <string name="password">password</string>
+    <string name="login">Se Connecter</string>
 
 </resources>

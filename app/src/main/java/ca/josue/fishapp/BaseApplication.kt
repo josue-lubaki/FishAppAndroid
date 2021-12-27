@@ -4,6 +4,9 @@ class BaseApplication(
 ){
     companion object{
         const val BASE_URL: String = "https://fish-sales-application.herokuapp.com/api/v1/"
-        lateinit var ID_USER_CURRENT : String
+        var ID_USER_CURRENT : String? = null
+        var TOKEN : String? = null
+        var EMAIL : String? = null
+        var PASSWORD : String ? = null
     }
 }

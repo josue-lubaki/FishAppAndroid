@@ -13,4 +13,17 @@
         tools:listitem="@layout/item_vertical_article"
         />
 
+    <Button
+        android:id="@+id/ask_login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_green"
+        android:padding="@dimen/little_size"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:clickable="true"
+        android:visibility="invisible"
+        android:textSize="@dimen/medium_size"
+        android:textStyle="bold"/>
+
 </LinearLayout>

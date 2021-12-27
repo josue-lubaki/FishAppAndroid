@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
      * @param fragment le fragment à replacer
      * @param titlePage l'identifiant de la textView qui fait reference au nom de la page
      * */
-    private fun loadFragment(fragment: Fragment, titlePage: Int) {
+    fun loadFragment(fragment: Fragment, titlePage: Int) {
 
         // actualiser le titre de la page
         findViewById<TextView>(R.id.page_title).text = resources.getString(titlePage)
