@@ -35,7 +35,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input"
         android:layout_width="350dp"
-        android:background="@color/darkGray"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,14 +43,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_input_txt"
             android:layout_width="350dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/email"
+            android:background="@color/darkGray"
             android:inputType="textEmailAddress"
             android:paddingStart="@dimen/medium_size"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white"
-            style="@style/SubtitleTextStyle"
-            android:layout_marginTop="@dimen/default_margin"/>
+            style="@style/SubtitleTextStyle"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +70,6 @@
             android:background="@color/darkGray"
             android:paddingStart="@dimen/medium_size"
             android:inputType="textPassword"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white"
             style="@style/SubtitleTextStyle"
             android:layout_marginTop="@dimen/default_margin" />
