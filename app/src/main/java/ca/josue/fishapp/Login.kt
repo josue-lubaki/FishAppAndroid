@@ -11,9 +11,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ca.josue.fishapp.BaseApplication.Companion.EMAIL
+import ca.josue.fishapp.BaseApplication.Companion.ID_USER_CURRENT
+import ca.josue.fishapp.BaseApplication.Companion.NAME_USER
 import ca.josue.fishapp.fragment.CommandesFragment
 import ca.josue.fishapp.model.MyLogin
 import ca.josue.fishapp.model.UserDTO
+import ca.josue.fishapp.model.UserResponse
 import ca.josue.fishapp.services.API
 import ca.josue.fishapp.services.ApiInterface
 import com.google.android.material.textfield.TextInputEditText
@@ -40,14 +43,14 @@ class Login : AppCompatActivity() {
         var inputPasswordBool = true
 
         // Supprimer les Text des composants
-        inputEmail.setOnFocusChangeListener { view, b ->
+        inputEmail.setOnFocusChangeListener { _, b ->
             if (b && inputEmailBool){
                 inputEmail.setText("")
                 inputEmailBool = false
             }
          }
 
-        inputPassword.setOnFocusChangeListener { view, b ->
+        inputPassword.setOnFocusChangeListener { _, b ->
             if (b && inputPasswordBool){
                 inputPassword.setText("")
                 inputPasswordBool = false
@@ -81,6 +84,23 @@ class Login : AppCompatActivity() {
         }
     }
 
+    private fun getInfoUser(){
+        API.getApi()?.create(ApiInterface::class.java)?.getInfoUser(ID_USER_CURRENT!!)?.enqueue(object : Callback<UserResponse?> {
+            override fun onResponse(call: Call<UserResponse?>, response: Response<UserResponse?>) {
+                if(!response.isSuccessful)
+                    return
+
+                val userInfo = response.body()!!
+                // setter les valeurs
+                NAME_USER = userInfo.name
+            }
+
+            override fun onFailure(call: Call<UserResponse?>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
     /**
      * Methode qui vérifie si l'Utilisateur a entré un email valide
      * @param str le TextView de l'email à vérifier
@@ -111,7 +131,10 @@ class Login : AppCompatActivity() {
                         EMAIL = responseLogin.email
                         BaseApplication.PASSWORD = user.password
 
-                        println("Voici à present l'id : ${BaseApplication.ID_USER_CURRENT}")
+                        println("Voici à present l'id : $ID_USER_CURRENT")
+                        // Récupèrer le nom de l'utilisateur
+                        if (ID_USER_CURRENT != null)
+                            getInfoUser()
 
                         // Récupèration des commandes
                         CommandesFragment.commandeList.clear()
@@ -119,7 +142,7 @@ class Login : AppCompatActivity() {
 
                         // Sauvergarder son email
 
-                        if(BaseApplication.ID_USER_CURRENT != null){
+                        if(ID_USER_CURRENT != null){
                             val intent = Intent(this@Login, MainActivity::class.java)
                             startActivity(intent)
                             finish()

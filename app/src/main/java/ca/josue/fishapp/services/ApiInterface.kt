@@ -1,9 +1,6 @@
 package ca.josue.fishapp.services
 
-import ca.josue.fishapp.model.MyCommandesItem
-import ca.josue.fishapp.model.MyLogin
-import ca.josue.fishapp.model.Product
-import ca.josue.fishapp.model.UserDTO
+import ca.josue.fishapp.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -20,5 +17,10 @@ interface ApiInterface {
     fun getMyCommands(
             @Path("id") id_user_current : String
     ) : Call<List<MyCommandesItem>>
+
+    @GET("users/{id}")
+    fun getInfoUser(
+            @Path("id") idUser : String
+    ) : Call<UserResponse>
 
 }

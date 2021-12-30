@@ -48,7 +48,9 @@
             android:background="@color/darkGray"
             android:inputType="textEmailAddress"
             android:paddingStart="@dimen/medium_size"
+            android:layout_gravity="center"
             android:textColor="@color/white"
+            android:paddingVertical="@dimen/item_margin"
             style="@style/SubtitleTextStyle"/>
     </com.google.android.material.textfield.TextInputLayout>
 

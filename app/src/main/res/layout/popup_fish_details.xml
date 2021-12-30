@@ -52,6 +52,7 @@
                 android:textColor="@color/darkRed"
                 android:textSize="@dimen/default_margin"
                 android:textStyle="bold"
+                android:paddingEnd="@dimen/item_margin"
 
                 />
 

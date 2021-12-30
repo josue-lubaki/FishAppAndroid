@@ -11,5 +11,6 @@ class BaseApplication(
         var PHONE : String? = null
         var APARTEMENT : String? = null
         var AVENUE : String? = null
+        var NAME_USER : String? = null
     }
 }

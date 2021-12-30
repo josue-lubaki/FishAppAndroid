@@ -19,13 +19,12 @@ class HomeFragment(private val context : MainActivity): Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view =  if(fishListProduct.isNotEmpty()){
+
+        return if(fishListProduct.isNotEmpty()){
             inflater.inflate(R.layout.fragment_home, container, false)
         }else{
             inflater.inflate(R.layout.fragment_home_empty, container, false)
         }
-
-        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

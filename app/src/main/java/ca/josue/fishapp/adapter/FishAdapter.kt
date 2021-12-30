@@ -14,10 +14,10 @@ import ca.josue.fishapp.model.FishModelDTO
 import com.bumptech.glide.Glide
 
 class FishAdapter(
-        val context: MainActivity,
+        val mainContext: MainActivity,
         private val fishListDTO : List<FishModelDTO>,
         private val layoutId : Int
-        ) : RecyclerView.Adapter<FishAdapter.ViewHolder>(){
+        ) : RecyclerView.Adapter<FishAdapter.ViewHolder>(), IAdapter{
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val fishImage : ImageView = view.findViewById(R.id.home_page_image_article)
@@ -34,7 +34,7 @@ class FishAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentFish = fishListDTO[position]
 
-        Glide.with(context).load(Uri.parse(currentFish.imageUrl)).into(holder.fishImage)
+        Glide.with(mainContext).load(Uri.parse(currentFish.imageUrl)).into(holder.fishImage)
         holder.fishName.text = currentFish.name
         holder.fishPrice.text = "$${currentFish.price}"
 
@@ -49,4 +49,7 @@ class FishAdapter(
     }
 
     override fun getItemCount(): Int = fishListDTO.size
+    override fun getContext(): MainActivity {
+        return mainContext
+    }
 }

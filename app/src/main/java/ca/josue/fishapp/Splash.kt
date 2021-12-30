@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import ca.josue.fishapp.services.API
 import ca.josue.fishapp.services.ApiInterface
 import ca.josue.fishapp.fragment.HomeFragment
+import ca.josue.fishapp.fragment.HomeFragment.Companion.fishListProduct
 import ca.josue.fishapp.model.FishModelDTO
 import ca.josue.fishapp.model.Product
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -15,6 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("DEPRECATION")
 class Splash : AppCompatActivity() {
     private lateinit var myProgress: LinearProgressIndicator
     var pStatus = 0
@@ -35,13 +37,15 @@ class Splash : AppCompatActivity() {
                 handler.post { myProgress.progress = pStatus }
                 try {
                     // Just to display the progress slowly
-                    Thread.sleep(50)
+                    Thread.sleep(85)
                 } catch (e: InterruptedException) {
                     e.printStackTrace()
                 }
             }
 
             if (myProgress.progress == 100) {
+                if(fishListProduct.isEmpty())
+                    getAllProductsViaAPI()
                 val intent = Intent(this@Splash, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -68,7 +72,7 @@ class Splash : AppCompatActivity() {
                             product.image,
                             product.description
                     )
-                    HomeFragment.fishListProduct.add(prod)
+                    fishListProduct.add(prod)
                 }
             }
 

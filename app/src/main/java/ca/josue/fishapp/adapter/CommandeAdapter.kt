@@ -3,32 +3,58 @@ package ca.josue.fishapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
+import ca.josue.fishapp.fragment.FishDetailsFragment
 import ca.josue.fishapp.model.CommandeModel
+import ca.josue.fishapp.model.FishModelDTO
 import ca.josue.fishapp.model.MyCommandesItem
+import ca.josue.fishapp.model.ProductDTO
+import com.bumptech.glide.Glide
 
 class CommandeAdapter(
-        private val context : MainActivity,
-        private val commandeList : List<MyCommandesItem>
-        ) : RecyclerView.Adapter<CommandeAdapter.ViewHolder>() {
+        val mainContext : MainActivity,
+        private val productDTOList : List<ProductDTO>
+        ) : RecyclerView.Adapter<CommandeAdapter.ViewHolder>(), IAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_vertical_article, parent, false )
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = commandeList.size
+    override fun getItemCount(): Int = productDTOList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentCommande = commandeList[position]
-        holder.name.text = currentCommande.user
+        val currentCommande = productDTOList[position]
+        val currentFish = FishModelDTO(
+                name = currentCommande.name,
+                price = currentCommande.price as Int,
+                imageUrl = currentCommande.imageURL,
+                description = currentCommande.description
+        )
+
+        holder.name.text = currentCommande.name
+        Glide.with(mainContext).load(currentCommande.imageURL).into(holder.image)
+        holder.price.text = "$${currentCommande.price}"
+
+        holder.consultBtn.setOnClickListener {
+            FishDetailsFragment(this, currentFish).show()
+        }
     }
+
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val name: TextView = view.findViewById(R.id.home_page_title_article)
+        val image : ImageView = view.findViewById(R.id.home_page_image_article)
+        val price : TextView = view.findViewById(R.id.home_page_price)
+        val consultBtn : TextView = view.findViewById(R.id.home_page_consult_btn)
+    }
+
+    override fun getContext(): MainActivity {
+        return mainContext
     }
 
 }

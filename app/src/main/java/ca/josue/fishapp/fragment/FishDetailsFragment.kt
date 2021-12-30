@@ -4,18 +4,20 @@ import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
 import android.view.Window
+import android.widget.Adapter
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import ca.josue.fishapp.R
 import ca.josue.fishapp.adapter.FishAdapter
+import ca.josue.fishapp.adapter.IAdapter
 import ca.josue.fishapp.model.FishModelDTO
 import com.bumptech.glide.Glide
 
 class FishDetailsFragment(
-        private val adapter : FishAdapter,
+        private val adapter : IAdapter,
         private val currentFishDTO : FishModelDTO
-        ) : Dialog(adapter.context) {
+        ) : Dialog(adapter.getContext()) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +43,7 @@ class FishDetailsFragment(
     private fun setComponent() {
         // Actualiser les informations du poisson
         val fishImage : ImageView = findViewById(R.id.commande_detail_image)
-        Glide.with(adapter.context).load(Uri.parse(currentFishDTO.imageUrl)).into(fishImage)
+        Glide.with(adapter.getContext()).load(Uri.parse(currentFishDTO.imageUrl)).into(fishImage)
         findViewById<TextView>(R.id.commande_detail_title_article).text = currentFishDTO.name
         findViewById<TextView>(R.id.commande_detail_description).text = currentFishDTO.description
         findViewById<TextView>(R.id.commande_detail_price).text = "$${currentFishDTO.price}"

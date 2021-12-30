@@ -12,7 +12,11 @@ import ca.josue.fishapp.BaseApplication.Companion.APARTEMENT
 import ca.josue.fishapp.BaseApplication.Companion.AVENUE
 import ca.josue.fishapp.BaseApplication.Companion.BASE_URL
 import ca.josue.fishapp.BaseApplication.Companion.EMAIL
+import ca.josue.fishapp.BaseApplication.Companion.ID_USER_CURRENT
+import ca.josue.fishapp.BaseApplication.Companion.NAME_USER
+import ca.josue.fishapp.BaseApplication.Companion.PASSWORD
 import ca.josue.fishapp.BaseApplication.Companion.PHONE
+import ca.josue.fishapp.BaseApplication.Companion.TOKEN
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.MainActivity.Companion.navBar
 import ca.josue.fishapp.R
@@ -38,17 +42,19 @@ class ProfileFragment(private val context : MainActivity) : Fragment() {
             telephoneInput.text = PHONE.toString()
             adresse.text = "$APARTEMENT $AVENUE"
             emailInput.text = EMAIL.toString()
+            nameInput.text = NAME_USER.toString()
         }
 
         // deconnexion
         deconnexionBtn.setOnClickListener {
-            BaseApplication.ID_USER_CURRENT = null
-            BaseApplication.AVENUE = null
-            BaseApplication.APARTEMENT = null
-            BaseApplication.PASSWORD = null
-            BaseApplication.PHONE = null
-            BaseApplication.TOKEN = null
-            BaseApplication.EMAIL = null
+            ID_USER_CURRENT = null
+            AVENUE = null
+            APARTEMENT = null
+            PASSWORD = null
+            PHONE = null
+            TOKEN = null
+            EMAIL = null
+            NAME_USER = null
 
             context.loadFragment(CommandesFragment(context), R.string.commande_detail_page_title)
             navBar.show(2, true)

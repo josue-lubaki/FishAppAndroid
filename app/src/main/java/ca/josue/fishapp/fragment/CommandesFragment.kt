@@ -31,6 +31,7 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
 
     companion object{
         val commandeList = arrayListOf<MyCommandesItem>()
+        val productDTOList = arrayListOf<ProductDTO>()
 
         /***
          * Methode qui permet de récupèrer toutes les commandes en cours de l'Utilisateur connecté
@@ -45,8 +46,24 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
                                 return
 
                             val responseList = response.body()!!
-                            for (commandItem in responseList) {
-                                commandeList.add(commandItem)
+                            for (order in responseList) {
+                                commandeList.add(order)
+                            }
+
+                            responseList.forEach {myCommandItem ->
+                                myCommandItem.orderItems.forEach {orderItem ->
+                                    val product = ProductDTO()
+                                    product.status = myCommandItem.status
+                                    product.quantity = orderItem.quantity
+                                    product.name = orderItem.product.name
+                                    product.description = orderItem.product.description
+                                    product.price = orderItem.product.price
+                                    product.imageURL = orderItem.product.image
+                                    product.idOrderItem = orderItem.id
+
+                                    // Add to list
+                                    productDTOList.add(product)
+                                }
                             }
 
                             // récupèrer le phone
@@ -70,7 +87,7 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when {
-            commandeList.isNotEmpty() && ID_USER_CURRENT != null  -> inflater.inflate(R.layout.commandes_fragment, container, false)
+            productDTOList.isNotEmpty() && ID_USER_CURRENT != null  -> inflater.inflate(R.layout.commandes_fragment, container, false)
             ID_USER_CURRENT == null -> inflater.inflate(R.layout.commandes_fragment_to_login, container, false)
             else -> inflater.inflate(R.layout.commandes_fragment_empty, container, false)
         }
@@ -79,10 +96,10 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(commandeList.isNotEmpty()) {
+        if(productDTOList.isNotEmpty()) {
             // Retrieve Vertical RecyclerView
             val commandesRecyclerView : RecyclerView= view.findViewById(R.id.vertical_recyclerview_commandes)
-            commandesRecyclerView.adapter = CommandeAdapter(context, commandeList)
+            commandesRecyclerView.adapter = CommandeAdapter(context, productDTOList)
             commandesRecyclerView.layoutManager = LinearLayoutManager(context)
             commandesRecyclerView.addItemDecoration(FishItemDecoration())
         }
@@ -94,7 +111,7 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
         }else {
             val loginBtn : TextView = view.findViewById(R.id.ask_login_btn)
 
-            loginBtn.setOnClickListener { v ->
+            loginBtn.setOnClickListener {
                 // Si l'Utilisateur n'est pas encore connecté
                 if(ID_USER_CURRENT == null) {
                     val intent = Intent(context.baseContext, Login::class.java)
@@ -103,7 +120,7 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
                 }
                 else{
                     // retrieve All commands for user
-                    commandeList.clear()
+                    productDTOList.clear()
                     getCommandesUser()
                 }
             }
