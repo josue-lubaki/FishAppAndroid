@@ -1,4 +1,4 @@
-package ca.josue.fishapp.model
+package ca.josue.fishapp.model.dto
 
 class ProductDTO {
     lateinit var name : String

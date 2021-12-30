@@ -1,6 +1,9 @@
 package ca.josue.fishapp.services
 
 import ca.josue.fishapp.model.*
+import ca.josue.fishapp.model.dto.MyLoginDTO
+import ca.josue.fishapp.model.dto.UserDTO
+import ca.josue.fishapp.model.dto.UserInfoDTO
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -10,7 +13,7 @@ interface ApiInterface {
 
     // https://fish-sales-application.herokuapp.com/api/v1/users/login
     @POST("users/login")
-    fun login(@Body user : UserDTO) : Call<MyLogin>
+    fun login(@Body user : UserDTO) : Call<MyLoginDTO>
 
     // https://fish-sales-application.herokuapp.com/api/v1/orders/get/userorder/{id}
     @GET("orders/get/userorder/{id}")
@@ -21,6 +24,6 @@ interface ApiInterface {
     @GET("users/{id}")
     fun getInfoUser(
             @Path("id") idUser : String
-    ) : Call<UserResponse>
+    ) : Call<UserInfoDTO>
 
 }

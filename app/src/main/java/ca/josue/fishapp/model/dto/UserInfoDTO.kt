@@ -1,6 +1,6 @@
-package ca.josue.fishapp.model
+package ca.josue.fishapp.model.dto
 
-data class UserResponse(
+data class UserInfoDTO(
     val __v: Int,
     val _id: String,
     val apartment: String,

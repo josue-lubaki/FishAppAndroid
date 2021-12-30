@@ -4,14 +4,12 @@ import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
 import android.view.Window
-import android.widget.Adapter
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import ca.josue.fishapp.R
-import ca.josue.fishapp.adapter.FishAdapter
 import ca.josue.fishapp.adapter.IAdapter
-import ca.josue.fishapp.model.FishModelDTO
+import ca.josue.fishapp.model.dto.FishModelDTO
 import com.bumptech.glide.Glide
 
 class FishDetailsFragment(

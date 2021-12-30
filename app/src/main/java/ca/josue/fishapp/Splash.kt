@@ -7,9 +7,8 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import ca.josue.fishapp.services.API
 import ca.josue.fishapp.services.ApiInterface
-import ca.josue.fishapp.fragment.HomeFragment
 import ca.josue.fishapp.fragment.HomeFragment.Companion.fishListProduct
-import ca.josue.fishapp.model.FishModelDTO
+import ca.josue.fishapp.model.dto.FishModelDTO
 import ca.josue.fishapp.model.Product
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import retrofit2.Call

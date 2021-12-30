@@ -2,11 +2,8 @@ package ca.josue.fishapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.BoringLayout
 import android.text.TextUtils
-import android.view.View
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +11,9 @@ import ca.josue.fishapp.BaseApplication.Companion.EMAIL
 import ca.josue.fishapp.BaseApplication.Companion.ID_USER_CURRENT
 import ca.josue.fishapp.BaseApplication.Companion.NAME_USER
 import ca.josue.fishapp.fragment.CommandesFragment
-import ca.josue.fishapp.model.MyLogin
-import ca.josue.fishapp.model.UserDTO
-import ca.josue.fishapp.model.UserResponse
+import ca.josue.fishapp.model.dto.MyLoginDTO
+import ca.josue.fishapp.model.dto.UserDTO
+import ca.josue.fishapp.model.dto.UserInfoDTO
 import ca.josue.fishapp.services.API
 import ca.josue.fishapp.services.ApiInterface
 import com.google.android.material.textfield.TextInputEditText
@@ -85,17 +82,17 @@ class Login : AppCompatActivity() {
     }
 
     private fun getInfoUser(){
-        API.getApi()?.create(ApiInterface::class.java)?.getInfoUser(ID_USER_CURRENT!!)?.enqueue(object : Callback<UserResponse?> {
-            override fun onResponse(call: Call<UserResponse?>, response: Response<UserResponse?>) {
-                if(!response.isSuccessful)
+        API.getApi()?.create(ApiInterface::class.java)?.getInfoUser(ID_USER_CURRENT!!)?.enqueue(object : Callback<UserInfoDTO?> {
+            override fun onResponse(call: Call<UserInfoDTO?>, infoDTO: Response<UserInfoDTO?>) {
+                if(!infoDTO.isSuccessful)
                     return
 
-                val userInfo = response.body()!!
+                val userInfo = infoDTO.body()!!
                 // setter les valeurs
                 NAME_USER = userInfo.name
             }
 
-            override fun onFailure(call: Call<UserResponse?>, t: Throwable) {
+            override fun onFailure(call: Call<UserInfoDTO?>, t: Throwable) {
                 TODO("Not yet implemented")
             }
         })
@@ -119,8 +116,8 @@ class Login : AppCompatActivity() {
         API.getApi()
                 ?.create(ApiInterface::class.java)
                 ?.login(user)
-                ?.enqueue(object : Callback<MyLogin?> {
-                    override fun onResponse(call: Call<MyLogin?>, response: Response<MyLogin?>) {
+                ?.enqueue(object : Callback<MyLoginDTO?> {
+                    override fun onResponse(call: Call<MyLoginDTO?>, response: Response<MyLoginDTO?>) {
                         if(!response.isSuccessful)
                             return
                         val responseLogin = response.body()!!
@@ -152,7 +149,7 @@ class Login : AppCompatActivity() {
                         }
                     }
 
-                    override fun onFailure(call: Call<MyLogin?>, t: Throwable) {
+                    override fun onFailure(call: Call<MyLoginDTO?>, t: Throwable) {
                         println("Erreur lors de Login : ${t.message}")
                     }
                 })

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.fragment.FishDetailsFragment
-import ca.josue.fishapp.model.FishModelDTO
+import ca.josue.fishapp.model.dto.FishModelDTO
 import com.bumptech.glide.Glide
 
 class FishAdapter(

@@ -1,4 +1,4 @@
-package ca.josue.fishapp.model
+package ca.josue.fishapp.model.dto
 
 class FishModelDTO(
         val name : String  = "poisson",

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,8 +18,8 @@ import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.adapter.CommandeAdapter
 import ca.josue.fishapp.adapter.FishItemDecoration
-import ca.josue.fishapp.fragment.CommandesFragment.Companion.commandeList
 import ca.josue.fishapp.model.*
+import ca.josue.fishapp.model.dto.ProductDTO
 import ca.josue.fishapp.services.API
 import ca.josue.fishapp.services.ApiInterface
 import retrofit2.Call

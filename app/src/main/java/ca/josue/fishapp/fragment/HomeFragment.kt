@@ -10,7 +10,7 @@ import ca.josue.fishapp.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.adapter.FishAdapter
 import ca.josue.fishapp.adapter.FishItemDecoration
-import ca.josue.fishapp.model.FishModelDTO
+import ca.josue.fishapp.model.dto.FishModelDTO
 
 class HomeFragment(private val context : MainActivity): Fragment() {
 

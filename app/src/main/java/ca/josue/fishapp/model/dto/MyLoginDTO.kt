@@ -1,6 +1,6 @@
-package ca.josue.fishapp.model
+package ca.josue.fishapp.model.dto
 
-data class MyLogin(
+data class MyLoginDTO(
     val id: String,
     val email: String,
     val name: String,
