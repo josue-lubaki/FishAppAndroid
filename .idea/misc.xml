@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/drawable-anydpi/fish_logo.xml" value="0.1055" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/drawable/thumb.xml" value="0.1535" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/drawable/track.xml" value="0.1535" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/activity_login.xml" value="0.264" />
@@ -12,6 +13,7 @@
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/fragment_home.xml" value="0.1693840579710145" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/fragment_home_empty.xml" value="0.1693840579710145" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/profile_fragment.xml" value="0.1334853090172239" />
+        <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/mipmap-xxxhdpi/fish_logo.xml" value="0.1055" />
       </map>
     </option>
   </component>
