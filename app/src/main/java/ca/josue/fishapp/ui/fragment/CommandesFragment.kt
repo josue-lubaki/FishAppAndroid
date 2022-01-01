@@ -13,15 +13,14 @@ import ca.josue.fishapp.ui.BaseApplication.Companion.APARTEMENT
 import ca.josue.fishapp.ui.BaseApplication.Companion.AVENUE
 import ca.josue.fishapp.ui.BaseApplication.Companion.ID_USER_CURRENT
 import ca.josue.fishapp.ui.BaseApplication.Companion.PHONE
-import ca.josue.fishapp.ui.Login
-import ca.josue.fishapp.ui.MainActivity
+import ca.josue.fishapp.ui.activity.Login
+import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.ui.adapter.CommandeAdapter
 import ca.josue.fishapp.ui.adapter.FishItemDecoration
 import ca.josue.fishapp.domain.model.*
-import ca.josue.fishapp.domain.dto.ProductDTO
+import ca.josue.fishapp.domain.dto.MyOrderDTO
 import ca.josue.fishapp.data.network.RetrofitClient
-import ca.josue.fishapp.data.network.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,7 +29,7 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
 
     companion object{
         val commandeList = arrayListOf<MyCommandesItem>()
-        val productDTOList = arrayListOf<ProductDTO>()
+        val productDTOList = arrayListOf<MyOrderDTO>()
 
         /***
          * Methode qui permet de récupèrer toutes les commandes en cours de l'Utilisateur connecté
@@ -51,7 +50,7 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
 
                         responseList.forEach {myCommandItem ->
                             myCommandItem.orderItems.forEach {orderItem ->
-                                val product = ProductDTO()
+                                val product = MyOrderDTO()
                                 product.status = myCommandItem.status
                                 product.quantity = orderItem.quantity
                                 product.name = orderItem.product.name
@@ -59,6 +58,7 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
                                 product.price = orderItem.product.price
                                 product.imageURL = orderItem.product.image
                                 product.idOrderItem = orderItem.id
+                                product.category = orderItem.product.category.name
 
                                 // Add to list
                                 productDTOList.add(product)

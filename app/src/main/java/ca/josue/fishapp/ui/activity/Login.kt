@@ -1,4 +1,4 @@
-package ca.josue.fishapp.ui
+package ca.josue.fishapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,7 @@ import ca.josue.fishapp.data.network.RetrofitClient
 import ca.josue.fishapp.domain.dto.UserInfoResponse
 import ca.josue.fishapp.domain.dto.UserLoginDTO
 import ca.josue.fishapp.domain.dto.UserLoginResponse
+import ca.josue.fishapp.ui.BaseApplication
 import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
 import ca.josue.fishapp.ui.BaseApplication.Companion.ID_USER_CURRENT
 import ca.josue.fishapp.ui.BaseApplication.Companion.NAME_USER

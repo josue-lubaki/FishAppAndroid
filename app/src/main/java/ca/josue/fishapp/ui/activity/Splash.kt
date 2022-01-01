@@ -1,20 +1,16 @@
-package ca.josue.fishapp.ui
+package ca.josue.fishapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import ca.josue.fishapp.R
 import ca.josue.fishapp.data.network.RetrofitClient
 import ca.josue.fishapp.ui.fragment.HomeFragment.Companion.fishListProduct
 import ca.josue.fishapp.domain.dto.FishModelResponse
 import ca.josue.fishapp.domain.model.Product
-import com.airbnb.lottie.Lottie
 import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.android.material.progressindicator.LinearProgressIndicator
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -62,9 +58,10 @@ class Splash : AppCompatActivity() {
                 val responseBody = response.body()!!
                 for (product in responseBody){
                     val prod = FishModelResponse(
+                            product.id,
                             product.name,
                             product.category.name,
-                            product.price,
+                            product.price.toDouble(),
                             product.image,
                             product.description
                     )

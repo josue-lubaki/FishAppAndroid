@@ -1,6 +1,6 @@
 package ca.josue.fishapp.domain.model
 
-data class Product(
+data class Product (
     val __v: Int,
     val _id: String,
     val category: Category,
@@ -9,7 +9,7 @@ data class Product(
     val description: String,
     val id: String,
     val image: String,
-    val images: List<Any>,
+    val images: List<String>,
     val isFeatured: Boolean,
     val name: String,
     val price: Int,

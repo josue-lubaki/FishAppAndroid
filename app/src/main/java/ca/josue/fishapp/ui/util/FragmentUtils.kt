@@ -3,7 +3,7 @@ package ca.josue.fishapp.ui.util
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import ca.josue.fishapp.R
-import ca.josue.fishapp.ui.MainActivity
+import ca.josue.fishapp.ui.activity.MainActivity
 
 class FragmentUtils {
     companion object{

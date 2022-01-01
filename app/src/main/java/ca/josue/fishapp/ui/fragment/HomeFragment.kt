@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import ca.josue.fishapp.ui.MainActivity
+import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.ui.adapter.FishAdapter
 import ca.josue.fishapp.ui.adapter.FishItemDecoration

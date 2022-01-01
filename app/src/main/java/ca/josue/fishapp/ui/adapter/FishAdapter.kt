@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ca.josue.fishapp.ui.MainActivity
+import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.ui.fragment.FishDetailsFragment
 import ca.josue.fishapp.domain.dto.FishModelResponse
 import com.bumptech.glide.Glide
 
 class FishAdapter(
-    val mainContext: MainActivity,
+    private val mainContext: MainActivity,
     private val fishListDTO : List<FishModelResponse>,
     private val layoutId : Int
         ) : RecyclerView.Adapter<FishAdapter.ViewHolder>(), IAdapter{

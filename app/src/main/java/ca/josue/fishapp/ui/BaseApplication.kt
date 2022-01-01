@@ -1,7 +1,10 @@
 package ca.josue.fishapp.ui
 
-class BaseApplication(
-){
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class BaseApplication : Application(){
     companion object{
         const val BASE_URL: String = "https://fish-sales-application.herokuapp.com/api/v1/"
         var ID_USER_CURRENT : String? = null

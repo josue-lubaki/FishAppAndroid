@@ -1,4 +1,4 @@
-package ca.josue.fishapp.ui
+package ca.josue.fishapp.ui.activity
 
 import android.os.Bundle
 import android.view.WindowManager
@@ -11,7 +11,9 @@ import ca.josue.fishapp.ui.fragment.HomeFragment
 import ca.josue.fishapp.ui.fragment.ProfileFragment
 import ca.josue.fishapp.ui.util.FragmentUtils.Companion.loadFragment
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var navBar : MeowBottomNavigation
 

@@ -14,7 +14,7 @@ import ca.josue.fishapp.ui.BaseApplication.Companion.NAME_USER
 import ca.josue.fishapp.ui.BaseApplication.Companion.PASSWORD
 import ca.josue.fishapp.ui.BaseApplication.Companion.PHONE
 import ca.josue.fishapp.ui.BaseApplication.Companion.TOKEN
-import ca.josue.fishapp.ui.MainActivity
+import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.ui.util.FragmentUtils.Companion.loadFragment
 
