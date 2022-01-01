@@ -1,4 +1,4 @@
-package ca.josue.fishapp
+package ca.josue.fishapp.ui
 
 class BaseApplication(
 ){

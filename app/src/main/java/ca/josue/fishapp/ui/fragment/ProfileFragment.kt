@@ -1,25 +1,22 @@
-package ca.josue.fishapp.fragment
+package ca.josue.fishapp.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import ca.josue.fishapp.BaseApplication
-import ca.josue.fishapp.BaseApplication.Companion.APARTEMENT
-import ca.josue.fishapp.BaseApplication.Companion.AVENUE
-import ca.josue.fishapp.BaseApplication.Companion.BASE_URL
-import ca.josue.fishapp.BaseApplication.Companion.EMAIL
-import ca.josue.fishapp.BaseApplication.Companion.ID_USER_CURRENT
-import ca.josue.fishapp.BaseApplication.Companion.NAME_USER
-import ca.josue.fishapp.BaseApplication.Companion.PASSWORD
-import ca.josue.fishapp.BaseApplication.Companion.PHONE
-import ca.josue.fishapp.BaseApplication.Companion.TOKEN
-import ca.josue.fishapp.MainActivity
-import ca.josue.fishapp.MainActivity.Companion.navBar
+import ca.josue.fishapp.ui.BaseApplication.Companion.APARTEMENT
+import ca.josue.fishapp.ui.BaseApplication.Companion.AVENUE
+import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
+import ca.josue.fishapp.ui.BaseApplication.Companion.ID_USER_CURRENT
+import ca.josue.fishapp.ui.BaseApplication.Companion.NAME_USER
+import ca.josue.fishapp.ui.BaseApplication.Companion.PASSWORD
+import ca.josue.fishapp.ui.BaseApplication.Companion.PHONE
+import ca.josue.fishapp.ui.BaseApplication.Companion.TOKEN
+import ca.josue.fishapp.ui.MainActivity
 import ca.josue.fishapp.R
+import ca.josue.fishapp.ui.util.FragmentUtils.Companion.loadFragment
 
 class ProfileFragment(private val context : MainActivity) : Fragment() {
 
@@ -56,8 +53,8 @@ class ProfileFragment(private val context : MainActivity) : Fragment() {
             EMAIL = null
             NAME_USER = null
 
-            context.loadFragment(CommandesFragment(context), R.string.commande_detail_page_title)
-            navBar.show(2, true)
+            loadFragment(context, CommandesFragment(context), R.string.commande_detail_page_title)
+            context.navBar.show(2, true)
         }
     }
 

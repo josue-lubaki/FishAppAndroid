@@ -1,4 +1,4 @@
-package ca.josue.fishapp.fragment
+package ca.josue.fishapp.ui.fragment
 
 import android.app.Dialog
 import android.net.Uri
@@ -8,13 +8,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import ca.josue.fishapp.R
-import ca.josue.fishapp.adapter.IAdapter
-import ca.josue.fishapp.model.dto.FishModelDTO
+import ca.josue.fishapp.ui.adapter.IAdapter
+import ca.josue.fishapp.domain.dto.FishModelResponse
 import com.bumptech.glide.Glide
 
 class FishDetailsFragment(
         private val adapter : IAdapter,
-        private val currentFishDTO : FishModelDTO
+        private val currentFishDTO : FishModelResponse
         ) : Dialog(adapter.getContext()) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

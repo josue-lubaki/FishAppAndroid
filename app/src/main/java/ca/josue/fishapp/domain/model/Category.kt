@@ -1,4 +1,4 @@
-package ca.josue.fishapp.model
+package ca.josue.fishapp.domain.model
 
 data class Category(
     val __v: Int,

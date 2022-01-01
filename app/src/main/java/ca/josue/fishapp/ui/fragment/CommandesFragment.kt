@@ -1,4 +1,4 @@
-package ca.josue.fishapp.fragment
+package ca.josue.fishapp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,19 +9,19 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ca.josue.fishapp.BaseApplication.Companion.APARTEMENT
-import ca.josue.fishapp.BaseApplication.Companion.AVENUE
-import ca.josue.fishapp.BaseApplication.Companion.ID_USER_CURRENT
-import ca.josue.fishapp.BaseApplication.Companion.PHONE
-import ca.josue.fishapp.Login
-import ca.josue.fishapp.MainActivity
+import ca.josue.fishapp.ui.BaseApplication.Companion.APARTEMENT
+import ca.josue.fishapp.ui.BaseApplication.Companion.AVENUE
+import ca.josue.fishapp.ui.BaseApplication.Companion.ID_USER_CURRENT
+import ca.josue.fishapp.ui.BaseApplication.Companion.PHONE
+import ca.josue.fishapp.ui.Login
+import ca.josue.fishapp.ui.MainActivity
 import ca.josue.fishapp.R
-import ca.josue.fishapp.adapter.CommandeAdapter
-import ca.josue.fishapp.adapter.FishItemDecoration
-import ca.josue.fishapp.model.*
-import ca.josue.fishapp.model.dto.ProductDTO
-import ca.josue.fishapp.services.API
-import ca.josue.fishapp.services.ApiInterface
+import ca.josue.fishapp.ui.adapter.CommandeAdapter
+import ca.josue.fishapp.ui.adapter.FishItemDecoration
+import ca.josue.fishapp.domain.model.*
+import ca.josue.fishapp.domain.dto.ProductDTO
+import ca.josue.fishapp.data.network.RetrofitClient
+import ca.josue.fishapp.data.network.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,51 +36,51 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
          * Methode qui permet de récupèrer toutes les commandes en cours de l'Utilisateur connecté
          */
         fun getCommandesUser() {
-            API.getApi()
-                    ?.create(ApiInterface::class.java)
-                    ?.getMyCommands(ID_USER_CURRENT!!)
-                    ?.enqueue(object : Callback<List<MyCommandesItem>?> {
-                        override fun onResponse(call: Call<List<MyCommandesItem>?>, response: Response<List<MyCommandesItem>?>) {
-                            if (!response.isSuccessful)
-                                return
+            RetrofitClient
+                .getApiService()
+                .getMyCommands(ID_USER_CURRENT!!)
+                .enqueue(object : Callback<List<MyCommandesItem>?> {
+                    override fun onResponse(call: Call<List<MyCommandesItem>?>, response: Response<List<MyCommandesItem>?>) {
+                        if (!response.isSuccessful)
+                            return
 
-                            val responseList = response.body()!!
-                            for (order in responseList) {
-                                commandeList.add(order)
+                        val responseList = response.body()!!
+                        for (order in responseList) {
+                            commandeList.add(order)
+                        }
+
+                        responseList.forEach {myCommandItem ->
+                            myCommandItem.orderItems.forEach {orderItem ->
+                                val product = ProductDTO()
+                                product.status = myCommandItem.status
+                                product.quantity = orderItem.quantity
+                                product.name = orderItem.product.name
+                                product.description = orderItem.product.description
+                                product.price = orderItem.product.price
+                                product.imageURL = orderItem.product.image
+                                product.idOrderItem = orderItem.id
+
+                                // Add to list
+                                productDTOList.add(product)
                             }
+                        }
 
-                            responseList.forEach {myCommandItem ->
-                                myCommandItem.orderItems.forEach {orderItem ->
-                                    val product = ProductDTO()
-                                    product.status = myCommandItem.status
-                                    product.quantity = orderItem.quantity
-                                    product.name = orderItem.product.name
-                                    product.description = orderItem.product.description
-                                    product.price = orderItem.product.price
-                                    product.imageURL = orderItem.product.image
-                                    product.idOrderItem = orderItem.id
-
-                                    // Add to list
-                                    productDTOList.add(product)
-                                }
-                            }
-
-                            // récupèrer le phone
-                            PHONE = commandeList[0].phone
-                            APARTEMENT = commandeList[0].apartment
-                            AVENUE = commandeList[0].avenue
+                        // récupèrer le phone
+                        PHONE = commandeList[0].phone
+                        APARTEMENT = commandeList[0].apartment
+                        AVENUE = commandeList[0].avenue
 
 //                        if(commandeList.isNotEmpty()) {
 //                            // Changer des Fragments puis revenir
 //                            context.loadFragment(HomeFragment(context), R.string.home_page_vedette)
 //                            context.loadFragment(CommandesFragment(context), R.string.commande_detail_page_title)
 //                        }
-                        }
+                    }
 
-                        override fun onFailure(call: Call<List<MyCommandesItem>?>, t: Throwable) {
-                            println("Erreur lors de la recuperation des commandes : ${t.message}")
-                        }
-                    })
+                    override fun onFailure(call: Call<List<MyCommandesItem>?>, t: Throwable) {
+                        println("Erreur lors de la recuperation des commandes : ${t.message}")
+                    }
+                })
         }
     }
 
@@ -125,9 +125,4 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
             }
         }
     }
-
-
-
-
-
 }

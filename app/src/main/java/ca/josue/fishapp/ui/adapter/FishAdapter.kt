@@ -1,4 +1,4 @@
-package ca.josue.fishapp.adapter
+package ca.josue.fishapp.ui.adapter
 
 import android.net.Uri
 import android.view.LayoutInflater
@@ -7,16 +7,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ca.josue.fishapp.MainActivity
+import ca.josue.fishapp.ui.MainActivity
 import ca.josue.fishapp.R
-import ca.josue.fishapp.fragment.FishDetailsFragment
-import ca.josue.fishapp.model.dto.FishModelDTO
+import ca.josue.fishapp.ui.fragment.FishDetailsFragment
+import ca.josue.fishapp.domain.dto.FishModelResponse
 import com.bumptech.glide.Glide
 
 class FishAdapter(
-        val mainContext: MainActivity,
-        private val fishListDTO : List<FishModelDTO>,
-        private val layoutId : Int
+    val mainContext: MainActivity,
+    private val fishListDTO : List<FishModelResponse>,
+    private val layoutId : Int
         ) : RecyclerView.Adapter<FishAdapter.ViewHolder>(), IAdapter{
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){

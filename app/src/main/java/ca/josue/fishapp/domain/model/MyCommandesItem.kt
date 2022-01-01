@@ -1,6 +1,6 @@
-package ca.josue.fishapp.model.dto
+package ca.josue.fishapp.domain.model
 
-data class UserInfoDTO(
+data class MyCommandesItem(
     val __v: Int,
     val _id: String,
     val apartment: String,
@@ -8,11 +8,13 @@ data class UserInfoDTO(
     val city: String,
     val commune: String,
     val country: String,
-    val email: String,
+    val dateOrdered: String,
     val id: String,
-    val name: String,
+    val notes: String,
+    val orderItems: List<OrderItem>,
     val phone: String,
     val quartier: String,
-    val question: String,
-    val reponse: String
+    val status: String,
+    val totalPrice: Int,
+    val user: String
 )

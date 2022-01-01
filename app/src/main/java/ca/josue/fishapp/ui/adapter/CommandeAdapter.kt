@@ -1,4 +1,4 @@
-package ca.josue.fishapp.adapter
+package ca.josue.fishapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ca.josue.fishapp.MainActivity
+import ca.josue.fishapp.ui.MainActivity
 import ca.josue.fishapp.R
-import ca.josue.fishapp.fragment.FishDetailsFragment
-import ca.josue.fishapp.model.dto.FishModelDTO
-import ca.josue.fishapp.model.dto.ProductDTO
+import ca.josue.fishapp.ui.fragment.FishDetailsFragment
+import ca.josue.fishapp.domain.dto.FishModelResponse
+import ca.josue.fishapp.domain.dto.ProductDTO
 import com.bumptech.glide.Glide
 
 class CommandeAdapter(
-        val mainContext : MainActivity,
-        private val productDTOList : List<ProductDTO>
+    val mainContext : MainActivity,
+    private val productDTOList : List<ProductDTO>
         ) : RecyclerView.Adapter<CommandeAdapter.ViewHolder>(), IAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,7 +27,7 @@ class CommandeAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentCommande = productDTOList[position]
-        val currentFish = FishModelDTO(
+        val currentFish = FishModelResponse(
                 name = currentCommande.name,
                 price = currentCommande.price as Int,
                 imageUrl = currentCommande.imageURL,

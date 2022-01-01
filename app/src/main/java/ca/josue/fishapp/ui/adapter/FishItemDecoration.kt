@@ -1,4 +1,4 @@
-package ca.josue.fishapp.adapter
+package ca.josue.fishapp.ui.adapter
 
 import android.graphics.Rect
 import android.view.View

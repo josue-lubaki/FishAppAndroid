@@ -1,6 +1,6 @@
-package ca.josue.fishapp.model.dto
+package ca.josue.fishapp.domain.dto
 
-class FishModelDTO(
+class FishModelResponse(
         val name : String  = "poisson",
         val category : String = "poisson rouge",
         val price : Int = 10,

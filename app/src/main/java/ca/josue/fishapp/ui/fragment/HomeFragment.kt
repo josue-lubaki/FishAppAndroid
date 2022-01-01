@@ -1,4 +1,4 @@
-package ca.josue.fishapp.fragment
+package ca.josue.fishapp.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import ca.josue.fishapp.MainActivity
+import ca.josue.fishapp.ui.MainActivity
 import ca.josue.fishapp.R
-import ca.josue.fishapp.adapter.FishAdapter
-import ca.josue.fishapp.adapter.FishItemDecoration
-import ca.josue.fishapp.model.dto.FishModelDTO
+import ca.josue.fishapp.ui.adapter.FishAdapter
+import ca.josue.fishapp.ui.adapter.FishItemDecoration
+import ca.josue.fishapp.domain.dto.FishModelResponse
 
 class HomeFragment(private val context : MainActivity): Fragment() {
 
     companion object{
-        val fishListProduct = arrayListOf<FishModelDTO>()
+        val fishListProduct = arrayListOf<FishModelResponse>()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
