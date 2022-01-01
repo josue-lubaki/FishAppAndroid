@@ -21,6 +21,7 @@ import ca.josue.fishapp.ui.fragment.CommandesFragment
 import ca.josue.fishapp.ui.util.CheckForm.Companion.checkEmailPasswordValid
 import ca.josue.fishapp.ui.util.CheckForm.Companion.initField
 import com.google.android.material.textfield.TextInputEditText
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import retrofit2.Call
@@ -28,6 +29,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class Login : AppCompatActivity() {
 
     @Inject
@@ -51,7 +53,7 @@ class Login : AppCompatActivity() {
 
         val connectBtn : TextView = findViewById(R.id.connect_btn)
         connectBtn.setOnClickListener {
-            connectBtn_actionPerformed(inputEmail, inputPassword)
+            connectBtnActionPerformed(inputEmail, inputPassword)
         }
     }
 
@@ -61,7 +63,7 @@ class Login : AppCompatActivity() {
      * @param inputEmail : TextView qui contient l'email entré par l'utilisateur
      * @param inputPassword : TextView qui contient le password entré par l'utilisateur
      * */
-    private fun connectBtn_actionPerformed(inputEmail: TextView, inputPassword : TextView) {
+    private fun connectBtnActionPerformed(inputEmail: TextView, inputPassword : TextView) {
         checkEmailPasswordValid(inputEmail, inputPassword)
 
         val user = UserLoginDTO(
@@ -77,24 +79,24 @@ class Login : AppCompatActivity() {
      * Methode qui permet de récupèrer toutes les informations de l'utilisateur via son ID
      * @param id L'identifiant de l'utilisateur logged
      * */
-    private fun getInfoUser(id : String){
-        RetrofitClient.getApiService().getInfoUser(id).enqueue(object : Callback<UserInfoResponse?> {
-            override fun onResponse(call: Call<UserInfoResponse?>, infoDTO: Response<UserInfoResponse?>) {
-                if(!infoDTO.isSuccessful)
-                    return
-
-                val userInfo = infoDTO.body()!!
-                // setter les valeurs
-                NAME_USER = userInfo.name
-
-                // TODO enregistrer les informations de l'utilisateur courant
-            }
-
-            override fun onFailure(call: Call<UserInfoResponse?>, t: Throwable) {
-                println(t.message)
-            }
-        })
-    }
+//    private fun getInfoUser(id : String){
+//        RetrofitClient.getApiService().getInfoUser(id).enqueue(object : Callback<UserInfoResponse?> {
+//            override fun onResponse(call: Call<UserInfoResponse?>, infoDTO: Response<UserInfoResponse?>) {
+//                if(!infoDTO.isSuccessful)
+//                    return
+//
+//                val userInfo = infoDTO.body()!!
+//                // setter les valeurs
+//                NAME_USER = userInfo.name
+//
+//                // TODO enregistrer les informations de l'utilisateur courant
+//            }
+//
+//            override fun onFailure(call: Call<UserInfoResponse?>, t: Throwable) {
+//                println(t.message)
+//            }
+//        })
+//    }
 
     /***
      * Methode qui permet de logger un Utilisateur
@@ -120,12 +122,7 @@ class Login : AppCompatActivity() {
                     )
 
                     runBlocking(Dispatchers.Default){
-                        // Récupèrer les informations de l'utilisateur
-                        getInfoUser(userLogged.id)
-                        if(NAME_USER != null){
-                            newUser.name = NAME_USER.toString()
-                            userRepository.insertUser(newUser)
-                        }
+                        userRepository.insertUser(newUser)
                     }
 
                     // Setter l'ID de l'utilisateur courant
@@ -133,6 +130,7 @@ class Login : AppCompatActivity() {
                     BaseApplication.TOKEN = userLogged.token
                     EMAIL = userLogged.email
                     BaseApplication.PASSWORD = user.password
+                    NAME_USER = userLogged.name
 
                     // Récupèration des commandes Refresh la Liste - Synchronisation
                     CommandesFragment.commandeList.clear()
