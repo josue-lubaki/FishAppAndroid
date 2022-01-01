@@ -9,7 +9,7 @@ class User (
     @PrimaryKey
     val id: String,
     val email: String,
-    val name: String,
+    var name: String,
     val token: String,
     val timestamp : Long
 )

@@ -20,6 +20,7 @@ import java.lang.Thread.sleep
 import javax.inject.Inject
 
 @Suppress("DEPRECATION")
+@AndroidEntryPoint
 class Splash : AppCompatActivity() {
     private lateinit var myProgress: CircularProgressIndicator
     private lateinit var lottieWater : View

@@ -23,6 +23,11 @@ class MyOrderViewModel @Inject constructor(
         return myOrderRepository.insertMyOrder(myOrder)
     }
 
+    suspend fun insertMyOrders(myOrders : MutableList<MyOrderDTO>) {
+        return myOrderRepository.insertMyOrders(myOrders)
+    }
+
+
     suspend fun deleteMyOrder(myOrder : MyOrderDTO) {
         return myOrderRepository.deleteMyOrder(myOrder)
     }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import ca.josue.fishapp.R
+import ca.josue.fishapp.domain.repository.MyOrderRepository
 import ca.josue.fishapp.domain.repository.ProductResponseRepository
 import ca.josue.fishapp.ui.fragment.CommandesFragment
 import ca.josue.fishapp.ui.fragment.HomeFragment
@@ -18,7 +19,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var navBar : MeowBottomNavigation
 
     @Inject
-    lateinit var productRepo : ProductResponseRepository
+    lateinit var productRepository : ProductResponseRepository
+
+    @Inject
+    lateinit var myOrderRepository: MyOrderRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +39,11 @@ class MainActivity : AppCompatActivity() {
         navBar.setOnShowListener { item: MeowBottomNavigation.Model ->
             when (item.id) {
                 1 -> {
-                    loadFragment(this, HomeFragment(this, productRepo), R.string.home_page_vedette)
+                    loadFragment(this, HomeFragment(this, productRepository), R.string.home_page_vedette)
                     return@setOnShowListener
                 }
                 2 -> {
-                    loadFragment(this,CommandesFragment(this), R.string.commande_detail_page_title)
+                    loadFragment(this,CommandesFragment(this, myOrderRepository), R.string.commande_detail_page_title)
                     return@setOnShowListener
                 }
                 3 -> {

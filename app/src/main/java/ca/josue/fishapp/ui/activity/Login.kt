@@ -11,6 +11,8 @@ import ca.josue.fishapp.data.data_source.network.RetrofitClient
 import ca.josue.fishapp.domain.dto.UserInfoResponse
 import ca.josue.fishapp.domain.dto.UserLoginDTO
 import ca.josue.fishapp.domain.dto.UserLoginResponse
+import ca.josue.fishapp.domain.model.User
+import ca.josue.fishapp.domain.repository.UserRepository
 import ca.josue.fishapp.ui.BaseApplication
 import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
 import ca.josue.fishapp.ui.BaseApplication.Companion.ID_USER_CURRENT
@@ -19,15 +21,17 @@ import ca.josue.fishapp.ui.fragment.CommandesFragment
 import ca.josue.fishapp.ui.util.CheckForm.Companion.checkEmailPasswordValid
 import ca.josue.fishapp.ui.util.CheckForm.Companion.initField
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 class Login : AppCompatActivity() {
-//
-//    companion object{
-//        const val GOTO_COMMANDES  = "GOTO_COMMANDES_TRUE"
-//    }
+
+    @Inject
+    lateinit var userRepository : UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,16 +111,28 @@ class Login : AppCompatActivity() {
 
                     val userLogged = response.body()!!
 
+                    val newUser = User(
+                        id = userLogged.id,
+                        email = userLogged.email,
+                        name = userLogged.name,
+                        token = userLogged.token,
+                        timestamp = System.currentTimeMillis()
+                    )
+
+                    runBlocking(Dispatchers.Default){
+                        // Récupèrer les informations de l'utilisateur
+                        getInfoUser(userLogged.id)
+                        if(NAME_USER != null){
+                            newUser.name = NAME_USER.toString()
+                            userRepository.insertUser(newUser)
+                        }
+                    }
+
                     // Setter l'ID de l'utilisateur courant
                     ID_USER_CURRENT = userLogged.id
                     BaseApplication.TOKEN = userLogged.token
                     EMAIL = userLogged.email
                     BaseApplication.PASSWORD = user.password
-
-                    // TODO Room enregistrer les coordonnées de l'utilisateur
-
-                    // Récupèrer le nom de l'utilisateur
-                    getInfoUser(userLogged.id)
 
                     // Récupèration des commandes Refresh la Liste - Synchronisation
                     CommandesFragment.commandeList.clear()

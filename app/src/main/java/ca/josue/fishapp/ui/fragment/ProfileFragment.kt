@@ -16,9 +16,14 @@ import ca.josue.fishapp.ui.BaseApplication.Companion.PHONE
 import ca.josue.fishapp.ui.BaseApplication.Companion.TOKEN
 import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.R
+import ca.josue.fishapp.domain.repository.MyOrderRepository
 import ca.josue.fishapp.ui.util.FragmentUtils.Companion.loadFragment
+import javax.inject.Inject
 
 class ProfileFragment(private val context : MainActivity) : Fragment() {
+
+    @Inject
+    lateinit var myOrderRepository: MyOrderRepository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.profile_fragment, container, false)
@@ -53,7 +58,7 @@ class ProfileFragment(private val context : MainActivity) : Fragment() {
             EMAIL = null
             NAME_USER = null
 
-            loadFragment(context, CommandesFragment(context), R.string.commande_detail_page_title)
+            loadFragment(context, CommandesFragment(context, myOrderRepository), R.string.commande_detail_page_title)
             context.navBar.show(2, true)
         }
     }

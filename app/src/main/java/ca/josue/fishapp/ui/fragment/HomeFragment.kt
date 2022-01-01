@@ -40,22 +40,18 @@ class HomeFragment(
         }
 
         productResponseVM.getProductResponses().observe(this.viewLifecycleOwner) { productResponseList ->
-            if (productResponseList.isNotEmpty()) {
+            // Retrieve RecyclerView Horizontal
+            val horizontalRecyclerView: RecyclerView =
+                view.findViewById(R.id.horizontal_recyclerview)
+            horizontalRecyclerView.adapter =
+                FishAdapter(context, productResponseList, R.layout.item_horizontal_article)
 
-                // Retrieve RecyclerView Horizontal
-                val horizontalRecyclerView: RecyclerView =
-                    view.findViewById(R.id.horizontal_recyclerview)
-                horizontalRecyclerView.adapter =
-                    FishAdapter(context, productResponseList, R.layout.item_horizontal_article)
-
-                // Retrieve Vertical RecyclerView
-                val verticalRecyclerView: RecyclerView =
-                    view.findViewById(R.id.vertical_recyclerview)
-                verticalRecyclerView.adapter =
-                    FishAdapter(context, productResponseList, R.layout.item_vertical_article)
-                verticalRecyclerView.addItemDecoration(FishItemDecoration())
-            }
+            // Retrieve Vertical RecyclerView
+            val verticalRecyclerView: RecyclerView =
+                view.findViewById(R.id.vertical_recyclerview)
+            verticalRecyclerView.adapter =
+                FishAdapter(context, productResponseList, R.layout.item_vertical_article)
+            verticalRecyclerView.addItemDecoration(FishItemDecoration())
         }
-
     }
 }

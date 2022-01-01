@@ -17,7 +17,7 @@ interface MyOrderDao {
     suspend fun insertMyOrder(myOrder : MyOrderDTO)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMyOrders(myOrders : List<MyOrderDTO>)
+    suspend fun insertMyOrders(myOrders : MutableList<MyOrderDTO>)
 
     @Update
     suspend fun updateMyOrder(myOrder : MyOrderDTO)

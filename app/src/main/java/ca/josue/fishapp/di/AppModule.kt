@@ -10,6 +10,7 @@ import ca.josue.fishapp.data.repository.UserRepositoryImpl
 import ca.josue.fishapp.domain.repository.MyOrderRepository
 import ca.josue.fishapp.domain.repository.ProductResponseRepository
 import ca.josue.fishapp.domain.repository.UserRepository
+import ca.josue.fishapp.domain.viewModel.MyOrderViewModel
 import ca.josue.fishapp.domain.viewModel.ProductResponseViewModel
 import dagger.Module
 import dagger.Provides
@@ -62,6 +63,12 @@ object AppModule {
     @Singleton
     fun provideMyOrderRepository(db : FishDatabase) : MyOrderRepository {
         return MyOrderRepositoryImpl(db.myOrderDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMyOrderViewModel(repo : MyOrderRepository) : MyOrderViewModel {
+        return MyOrderViewModel(repo)
     }
 
 

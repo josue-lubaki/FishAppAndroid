@@ -21,6 +21,10 @@ class MyOrderRepositoryImpl(
         return dao.insertMyOrder(myOrder)
     }
 
+    override suspend fun insertMyOrders(myOrderList: MutableList<MyOrderDTO>) {
+        return dao.insertMyOrders(myOrderList)
+    }
+
     override suspend fun deleteMyOrder(myOrder: MyOrderDTO) {
         return dao.deleteMyOrder(myOrder)
     }

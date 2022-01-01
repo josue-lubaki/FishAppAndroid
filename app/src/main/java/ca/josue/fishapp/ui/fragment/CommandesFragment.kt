@@ -21,11 +21,23 @@ import ca.josue.fishapp.ui.adapter.FishItemDecoration
 import ca.josue.fishapp.domain.model.*
 import ca.josue.fishapp.domain.dto.MyOrderDTO
 import ca.josue.fishapp.data.data_source.network.RetrofitClient
+import ca.josue.fishapp.domain.repository.MyOrderRepository
+import ca.josue.fishapp.domain.viewModel.MyOrderViewModel
+import ca.josue.fishapp.ui.activity.Splash
+import ca.josue.fishapp.ui.adapter.FishAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class CommandesFragment(private val context : MainActivity) : Fragment() {
+class CommandesFragment(
+    private val context : MainActivity,
+    val myOrderRepository : MyOrderRepository
+    ) : Fragment() {
+
+    private var myOrderVM = MyOrderViewModel(myOrderRepository)
 
     companion object{
         val commandeList = arrayListOf<MyCommandesItem>()
@@ -70,11 +82,6 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
                         APARTEMENT = commandeList[0].apartment
                         AVENUE = commandeList[0].avenue
 
-//                        if(commandeList.isNotEmpty()) {
-//                            // Changer des Fragments puis revenir
-//                            context.loadFragment(HomeFragment(context), R.string.home_page_vedette)
-//                            context.loadFragment(CommandesFragment(context), R.string.commande_detail_page_title)
-//                        }
                     }
 
                     override fun onFailure(call: Call<List<MyCommandesItem>?>, t: Throwable) {
@@ -95,33 +102,31 @@ class CommandesFragment(private val context : MainActivity) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(productDTOList.isNotEmpty()) {
-            // Retrieve Vertical RecyclerView
-            val commandesRecyclerView : RecyclerView= view.findViewById(R.id.vertical_recyclerview_commandes)
-            commandesRecyclerView.adapter = CommandeAdapter(context, productDTOList)
-            commandesRecyclerView.layoutManager = LinearLayoutManager(context)
-            commandesRecyclerView.addItemDecoration(FishItemDecoration())
+        val loginBtn : TextView = view.findViewById(R.id.ask_login_btn)
+        val commandesRecyclerView : RecyclerView= view.findViewById(R.id.vertical_recyclerview_commandes)
+
+        commandesRecyclerView.layoutManager = LinearLayoutManager(context)
+        commandesRecyclerView.addItemDecoration(FishItemDecoration())
+
+        runBlocking(Dispatchers.Default){
+            myOrderVM.insertMyOrders(productDTOList)
         }
 
-        // Vérifier l'utilisateur est déjà connecté
-        if(ID_USER_CURRENT != null){
-            //commandeList.clear()
-            //getCommandesUser()
-        }else {
-            val loginBtn : TextView = view.findViewById(R.id.ask_login_btn)
+        myOrderVM.getMyOrders().observe(this.viewLifecycleOwner) { myOrderList ->
+            commandesRecyclerView.adapter = CommandeAdapter(context, myOrderList)
+        }
 
-            loginBtn.setOnClickListener {
-                // Si l'Utilisateur n'est pas encore connecté
-                if(ID_USER_CURRENT == null) {
-                    val intent = Intent(context.baseContext, Login::class.java)
-                    startActivity(intent)
-                    context.finish()
-                }
-                else{
-                    // retrieve All commands for user
-                    productDTOList.clear()
-                    getCommandesUser()
-                }
+        loginBtn.setOnClickListener {
+            // Si l'Utilisateur n'est pas encore connecté
+            if(ID_USER_CURRENT == null) {
+                val intent = Intent(context.baseContext, Login::class.java)
+                startActivity(intent)
+                context.finish()
+            }
+            else{
+                // retrieve All commands for user
+                productDTOList.clear()
+                getCommandesUser()
             }
         }
     }
