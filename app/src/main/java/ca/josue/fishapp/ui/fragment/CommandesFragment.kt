@@ -159,8 +159,8 @@ class CommandesFragment(
                 // retrieve All commands for user
                 productDTOList.clear()
                 getCommandesUser()
-                MainActivity.navBar.show(3, true)
-                Toast.makeText(context, "Déconnectez-vous", Toast.LENGTH_LONG).show()
+                MainActivity.navBar.show(1, true)
+                Toast.makeText(context, "Connexion réussie", Toast.LENGTH_LONG).show()
             }
         }
     }

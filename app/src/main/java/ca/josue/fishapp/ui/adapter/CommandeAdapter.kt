@@ -44,7 +44,7 @@ class CommandeAdapter(
             FishDetailsFragment(this, currentFish).show()
         }
 
-        notifyItemChanged(position)
+        //notifyItemChanged(position)
     }
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
