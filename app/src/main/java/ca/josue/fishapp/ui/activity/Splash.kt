@@ -80,7 +80,8 @@ class Splash : AppCompatActivity() {
                         product.category.name,
                         product.price.toDouble(),
                         product.image,
-                        product.description
+                        product.description,
+                        product.isFeatured
                     )
                     fishListProduct.add(prod)
                 }

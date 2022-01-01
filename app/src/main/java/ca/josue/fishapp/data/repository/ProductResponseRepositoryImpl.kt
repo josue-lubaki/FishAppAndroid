@@ -29,7 +29,7 @@ class ProductResponseRepositoryImpl(
         return dao.deleteProductResponses()
     }
 
-    override suspend fun insertProductResponses(productResponseList: MutableList<ProductResponse>) {
-        return dao.insertProductResponses(productResponseList)
+    override suspend fun insertProductResponses(productResponses: MutableList<ProductResponse>) {
+        return dao.insertProductResponses(productResponses)
     }
 }

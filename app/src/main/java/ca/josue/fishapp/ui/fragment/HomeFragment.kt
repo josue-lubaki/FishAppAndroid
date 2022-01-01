@@ -56,7 +56,9 @@ class HomeFragment(
             horizontalRecyclerView.setHasFixedSize(true)
             horizontalRecyclerView.layoutManager = llm
             horizontalRecyclerView.adapter =
-                FishAdapter(context, productResponseList, R.layout.item_horizontal_article)
+                FishAdapter(context, productResponseList.filter { productResponse ->
+                    productResponse.isFeature
+                }, R.layout.item_horizontal_article)
 
             // Retrieve Vertical RecyclerView
             val verticalRecyclerView: RecyclerView =

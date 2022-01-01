@@ -33,7 +33,8 @@ class CommandeAdapter(
                 category = currentCommande.category,
                 price = currentCommande.price as Double,
                 imageUrl = currentCommande.imageURL,
-                description = currentCommande.description
+                description = currentCommande.description,
+                isFeature = currentCommande.isFeature
         )
 
         holder.name.text = currentCommande.name

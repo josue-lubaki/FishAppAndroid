@@ -10,5 +10,6 @@ class ProductResponse(
         val category : String,
         val price : Double,
         val imageUrl : String,
-        val description : String
+        val description : String,
+        val isFeature : Boolean
 )

@@ -15,6 +15,7 @@ class MyOrderDTO {
     lateinit var description : String
     lateinit var status : String
     lateinit var imageURL : String
+    var isFeature : Boolean = false
     @PrimaryKey
     lateinit var idOrderItem: String
 }
