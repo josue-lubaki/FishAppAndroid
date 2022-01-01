@@ -16,7 +16,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    lateinit var navBar : MeowBottomNavigation
+    companion object{
+        lateinit var navBar : MeowBottomNavigation
+    }
 
     @Inject
     lateinit var productRepository : ProductResponseRepository
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnShowListener
                 }
                 3 -> {
-                    loadFragment(this,ProfileFragment(this), R.string.profile_page_title)
+                    loadFragment(this,ProfileFragment(this, myOrderRepository), R.string.profile_page_title)
                     return@setOnShowListener
                 }
             }

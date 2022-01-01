@@ -12,6 +12,7 @@ import ca.josue.fishapp.domain.repository.ProductResponseRepository
 import ca.josue.fishapp.domain.repository.UserRepository
 import ca.josue.fishapp.domain.viewModel.MyOrderViewModel
 import ca.josue.fishapp.domain.viewModel.ProductResponseViewModel
+import ca.josue.fishapp.ui.activity.MainActivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +26,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideContext(context : ApplicationContext) : ApplicationContext {
+    fun provideContext(context : MainActivity) : MainActivity {
         return context
     }
 

@@ -15,5 +15,6 @@ class BaseApplication : Application(){
         var APARTEMENT : String? = null
         var AVENUE : String? = null
         var NAME_USER : String? = null
+        var SAVEDME : Boolean = false
     }
 }

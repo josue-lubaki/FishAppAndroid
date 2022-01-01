@@ -19,17 +19,18 @@
 
     <TextView
         android:id="@+id/ask_login_btn"
+        style="@style/Button"
         android:layout_width="140dp"
         android:layout_height="55dp"
         android:background="@drawable/corner_green"
+        android:clickable="true"
+        android:gravity="center"
         android:padding="@dimen/little_size"
         android:text="@string/login"
         android:textColor="@color/white"
-        android:clickable="true"
         android:textSize="@dimen/medium_size"
-        android:gravity="center"
         android:textStyle="bold"
-        style="@style/Button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/animationView" />

@@ -1,11 +1,16 @@
 package ca.josue.fishapp.ui.fragment
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import ca.josue.fishapp.R
+import ca.josue.fishapp.domain.repository.MyOrderRepository
 import ca.josue.fishapp.ui.BaseApplication.Companion.APARTEMENT
 import ca.josue.fishapp.ui.BaseApplication.Companion.AVENUE
 import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
@@ -14,16 +19,17 @@ import ca.josue.fishapp.ui.BaseApplication.Companion.NAME_USER
 import ca.josue.fishapp.ui.BaseApplication.Companion.PASSWORD
 import ca.josue.fishapp.ui.BaseApplication.Companion.PHONE
 import ca.josue.fishapp.ui.BaseApplication.Companion.TOKEN
+import ca.josue.fishapp.ui.activity.Login
 import ca.josue.fishapp.ui.activity.MainActivity
-import ca.josue.fishapp.R
-import ca.josue.fishapp.domain.repository.MyOrderRepository
 import ca.josue.fishapp.ui.util.FragmentUtils.Companion.loadFragment
-import javax.inject.Inject
 
-class ProfileFragment(private val context : MainActivity) : Fragment() {
 
-    @Inject
-    lateinit var myOrderRepository: MyOrderRepository
+class ProfileFragment(
+    private val context : MainActivity,
+    private val myOrderRepository : MyOrderRepository
+    ) : Fragment() {
+
+    private lateinit var prefs : SharedPreferences
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.profile_fragment, container, false)
@@ -31,6 +37,8 @@ class ProfileFragment(private val context : MainActivity) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        prefs = context.getSharedPreferences(Login.NAME_PREFERENCE, MODE_PRIVATE);
 
         // Récupèrer tous les composants
         val nameInput : TextView = view.findViewById(R.id.profile_name_input)
@@ -49,6 +57,14 @@ class ProfileFragment(private val context : MainActivity) : Fragment() {
 
         // deconnexion
         deconnexionBtn.setOnClickListener {
+
+            // Effacer les informations de la Preferences
+            val editor: SharedPreferences.Editor = prefs.edit()
+            editor.clear()
+            editor.apply()
+
+            Toast.makeText(context, "${NAME_USER.toString()} logged out...", Toast.LENGTH_SHORT).show()
+
             ID_USER_CURRENT = null
             AVENUE = null
             APARTEMENT = null
@@ -59,7 +75,7 @@ class ProfileFragment(private val context : MainActivity) : Fragment() {
             NAME_USER = null
 
             loadFragment(context, CommandesFragment(context, myOrderRepository), R.string.commande_detail_page_title)
-            context.navBar.show(2, true)
+            MainActivity.navBar.show(2, true)
         }
     }
 

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="save_username_default_key">564</integer>
+    <integer name="save_password_default_key">12345</integer>
+</resources>

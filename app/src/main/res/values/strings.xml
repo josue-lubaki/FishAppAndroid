@@ -41,5 +41,7 @@
     <string name="profile_page_connexion">Connexion</string>
     <string name="password">password</string>
     <string name="login">Se Connecter</string>
+    <string name="save_username_key">username_prefs</string>
+    <string name="save_password_key">password_prefs_key</string>
 
 </resources>

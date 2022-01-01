@@ -31,17 +31,18 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/open_door" />
 
-<!--    <com.google.android.material.progressindicator.CircularProgressIndicator-->
-<!--        android:layout_width="250dp"-->
-<!--        android:layout_height="10dp"-->
-<!--        android:id="@+id/myProgressBar"-->
-<!--        app:trackColor="@color/yellow"-->
-<!--        app:indicatorColor="@color/teal_700"-->
-<!--        android:indeterminateBehavior="repeat"-->
-<!--        android:indeterminate="true"-->
-<!--        android:layout_marginStart="@dimen/small_size"-->
-<!--        android:layout_marginBottom="@dimen/small_size"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/myProgressBar"
+        android:layout_width="250dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="@dimen/small_size"
+        android:indeterminate="true"
+        android:indeterminateBehavior="repeat"
+        app:indicatorColor="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animationViewWater"
+        app:trackColor="@color/yellow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

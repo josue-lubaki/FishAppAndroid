@@ -1,7 +1,10 @@
 package ca.josue.fishapp.ui.activity
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +13,7 @@ import ca.josue.fishapp.data.data_source.network.RetrofitClient
 import ca.josue.fishapp.domain.dto.ProductResponse
 import ca.josue.fishapp.domain.model.Product
 import ca.josue.fishapp.domain.repository.ProductResponseRepository
+import ca.josue.fishapp.ui.activity.Login.Companion.NAME_PREFERENCE
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -25,6 +29,7 @@ class Splash : AppCompatActivity() {
     private lateinit var myProgress: CircularProgressIndicator
     private lateinit var lottieWater : View
     private lateinit var lottieDoor : View
+    lateinit var prefs : SharedPreferences
 
     companion object{
         val fishListProduct = arrayListOf<ProductResponse>()
@@ -36,16 +41,20 @@ class Splash : AppCompatActivity() {
         // Desactiver le ToolBar
         supportActionBar?.hide()
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        //myProgress = findViewById(R.id.myProgressBar)
+        myProgress = findViewById(R.id.myProgressBar)
+        myProgress.animate()
+
+        prefs = applicationContext.getSharedPreferences(NAME_PREFERENCE, MODE_PRIVATE)
+
         lottieWater = findViewById(R.id.animationViewWater)
         CoroutineScope(Dispatchers.Default).launch {
-                launch {
-                    lottieWater.animate()
-                        .translationY(lottieWater.height.toFloat()/3)
-                        .alpha(1f)
-                        .setListener(null)
-                    getAllProductsViaAPI()
-                }
+            launch {
+                lottieWater.animate()
+                    .translationY(lottieWater.height.toFloat()/3)
+                    .alpha(1f)
+                    .setListener(null)
+                getAllProductsViaAPI()
+            }
             delay(2500)
             val intent = Intent(this@Splash, MainActivity::class.java)
             startActivity(intent)

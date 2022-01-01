@@ -43,8 +43,9 @@ class CommandeAdapter(
         holder.consultBtn.setOnClickListener {
             FishDetailsFragment(this, currentFish).show()
         }
-    }
 
+        notifyItemChanged(position)
+    }
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val name: TextView = view.findViewById(R.id.home_page_title_article)
