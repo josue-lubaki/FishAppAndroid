@@ -19,4 +19,31 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/nodata" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/horizontal_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/small_size"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vertical_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/small_size"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

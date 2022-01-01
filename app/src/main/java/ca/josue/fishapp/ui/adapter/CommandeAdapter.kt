@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.ui.fragment.FishDetailsFragment
-import ca.josue.fishapp.domain.dto.FishModelResponse
+import ca.josue.fishapp.domain.dto.ProductResponse
 import ca.josue.fishapp.domain.dto.MyOrderDTO
 import com.bumptech.glide.Glide
 
@@ -27,7 +27,7 @@ class CommandeAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentCommande = productDTOList[position]
-        val currentFish = FishModelResponse(
+        val currentFish = ProductResponse(
                 id = currentCommande.idOrderItem,
                 name = currentCommande.name,
                 category = currentCommande.category,

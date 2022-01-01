@@ -2,20 +2,23 @@ package ca.josue.fishapp.ui.activity
 
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import ca.josue.fishapp.R
+import ca.josue.fishapp.domain.repository.ProductResponseRepository
 import ca.josue.fishapp.ui.fragment.CommandesFragment
 import ca.josue.fishapp.ui.fragment.HomeFragment
 import ca.josue.fishapp.ui.fragment.ProfileFragment
 import ca.josue.fishapp.ui.util.FragmentUtils.Companion.loadFragment
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var navBar : MeowBottomNavigation
+
+    @Inject
+    lateinit var productRepo : ProductResponseRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         navBar.setOnShowListener { item: MeowBottomNavigation.Model ->
             when (item.id) {
                 1 -> {
-                    loadFragment(this, HomeFragment(this), R.string.home_page_vedette)
+                    loadFragment(this, HomeFragment(this, productRepo), R.string.home_page_vedette)
                     return@setOnShowListener
                 }
                 2 -> {

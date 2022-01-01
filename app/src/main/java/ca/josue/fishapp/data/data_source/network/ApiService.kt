@@ -1,4 +1,4 @@
-package ca.josue.fishapp.data.network
+package ca.josue.fishapp.data.data_source.network
 
 import ca.josue.fishapp.domain.model.*
 import ca.josue.fishapp.domain.dto.UserLoginResponse

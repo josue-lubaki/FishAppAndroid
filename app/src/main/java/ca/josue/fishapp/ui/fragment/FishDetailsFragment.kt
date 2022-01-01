@@ -9,12 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import ca.josue.fishapp.R
 import ca.josue.fishapp.ui.adapter.IAdapter
-import ca.josue.fishapp.domain.dto.FishModelResponse
+import ca.josue.fishapp.domain.dto.ProductResponse
 import com.bumptech.glide.Glide
 
 class FishDetailsFragment(
         private val adapter : IAdapter,
-        private val currentFishDTO : FishModelResponse
+        private val currentFishDTO : ProductResponse
         ) : Dialog(adapter.getContext()) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -7,7 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ca.josue.fishapp.R
-import ca.josue.fishapp.data.network.RetrofitClient
+import ca.josue.fishapp.data.data_source.network.RetrofitClient
 import ca.josue.fishapp.domain.dto.UserInfoResponse
 import ca.josue.fishapp.domain.dto.UserLoginDTO
 import ca.josue.fishapp.domain.dto.UserLoginResponse

@@ -20,7 +20,7 @@ import ca.josue.fishapp.ui.adapter.CommandeAdapter
 import ca.josue.fishapp.ui.adapter.FishItemDecoration
 import ca.josue.fishapp.domain.model.*
 import ca.josue.fishapp.domain.dto.MyOrderDTO
-import ca.josue.fishapp.data.network.RetrofitClient
+import ca.josue.fishapp.data.data_source.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

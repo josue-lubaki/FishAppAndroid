@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.ui.fragment.FishDetailsFragment
-import ca.josue.fishapp.domain.dto.FishModelResponse
+import ca.josue.fishapp.domain.dto.ProductResponse
 import com.bumptech.glide.Glide
 
 class FishAdapter(
     private val mainContext: MainActivity,
-    private val fishListDTO : List<FishModelResponse>,
+    private var fishListDTO : List<ProductResponse>,
     private val layoutId : Int
         ) : RecyclerView.Adapter<FishAdapter.ViewHolder>(), IAdapter{
 
@@ -46,7 +46,9 @@ class FishAdapter(
         holder.fishConsultButton.setOnClickListener {
             FishDetailsFragment(this, currentFish).show()
         }
+
     }
+
 
     override fun getItemCount(): Int = fishListDTO.size
     override fun getContext(): MainActivity {
