@@ -41,7 +41,7 @@ class FishAdapterProduct(
 
         Glide.with(mainContext).load(Uri.parse(currentFish.imageUrl)).into(holder.fishImage)
         holder.fishName.text = currentFish.name
-        holder.fishPrice.text = "$${currentFish.price}"
+        holder.fishPrice.text = "$${currentFish.price.toInt()}"
 
         // Intéragir lors du click sur l'image d'un poisson ou sur le button "consulte" et afficher le popup
         holder.itemView.setOnClickListener {

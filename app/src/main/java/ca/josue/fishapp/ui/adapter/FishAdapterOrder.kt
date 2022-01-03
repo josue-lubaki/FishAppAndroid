@@ -37,7 +37,7 @@ class FishAdapterOrder(
 
         // bind data
         holder.fishName.text = currentProduct.name
-        holder.fishPrice.text = "$${currentProduct.price}"
+        holder.fishPrice.text = "$${currentProduct.price.toInt()}"
         Glide.with(context).load(currentProduct.imageUrl).into(holder.fishImage)
 
         holder.fishConsultButton.setOnClickListener {

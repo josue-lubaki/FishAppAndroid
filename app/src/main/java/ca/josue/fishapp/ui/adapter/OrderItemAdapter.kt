@@ -30,7 +30,7 @@ class OrderItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val orderCurrent : ProductRoom = listOrderItem[position]
         holder.title.text = orderCurrent.name
-        holder.price.text = orderCurrent.price.toString()
+        holder.price.text = "$${orderCurrent.price.toInt()}"
         Glide.with(context).load(orderCurrent.imageUrl).into(holder.imageProduct)
 
         holder.consultBtn.setOnClickListener {
