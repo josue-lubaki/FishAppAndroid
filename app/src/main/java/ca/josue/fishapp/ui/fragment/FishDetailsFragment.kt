@@ -14,7 +14,8 @@ import com.bumptech.glide.Glide
 
 class FishDetailsFragment(
         private val adapter : IAdapter,
-        private val currentFishDTO : ProductResponse
+        private val currentFishDTO : ProductResponse,
+        private val withDetails : Boolean // s'il doit afficher le details de la commande ou pas
         ) : Dialog(adapter.getContext()) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

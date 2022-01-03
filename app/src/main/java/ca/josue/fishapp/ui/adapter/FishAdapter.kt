@@ -42,11 +42,11 @@ class FishAdapter(
 
         // Intéragir lors du click sur l'image d'un poisson ou sur le button "consulte" et afficher le popup
         holder.itemView.setOnClickListener {
-            FishDetailsFragment(this, currentFish).show()
+            FishDetailsFragment(this, currentFish, false).show()
         }
 
         holder.fishConsultButton.setOnClickListener {
-            FishDetailsFragment(this, currentFish).show()
+            FishDetailsFragment(this, currentFish, false).show()
         }
 
     }

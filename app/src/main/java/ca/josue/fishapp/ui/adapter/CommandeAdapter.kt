@@ -34,7 +34,8 @@ class CommandeAdapter(
                 price = currentCommande.price as Double,
                 imageUrl = currentCommande.imageURL,
                 description = currentCommande.description,
-                isFeature = currentCommande.isFeature
+                isFeature = currentCommande.isFeature,
+                status = currentCommande.status
         )
 
         holder.name.text = currentCommande.name
@@ -42,7 +43,7 @@ class CommandeAdapter(
         holder.price.text = "$${currentCommande.price}"
 
         holder.consultBtn.setOnClickListener {
-            FishDetailsFragment(this, currentFish).show()
+            FishDetailsFragment(this, currentFish, true).show()
         }
 
         //notifyItemChanged(position)

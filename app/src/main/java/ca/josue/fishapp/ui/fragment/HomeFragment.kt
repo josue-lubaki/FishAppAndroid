@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ca.josue.fishapp.R
 import ca.josue.fishapp.domain.repository.ProductResponseRepository
 import ca.josue.fishapp.domain.viewModel.ProductResponseViewModel
@@ -18,8 +17,6 @@ import ca.josue.fishapp.ui.activity.Splash.Companion.getAllProductsViaAPI
 import ca.josue.fishapp.ui.adapter.FishAdapter
 import ca.josue.fishapp.ui.adapter.FishItemDecoration
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
@@ -28,7 +25,7 @@ class HomeFragment(
     productRepository : ProductResponseRepository
     ): Fragment() {
 
-    var containerThis : ViewGroup? = null
+    private var containerThis : ViewGroup? = null
 
     private var productResponseVM = ProductResponseViewModel(productRepository)
 

@@ -81,7 +81,6 @@ class CommandesFragment(
                                 product.imageURL = orderItem.product.image
                                 product.idOrderItem = orderItem.id
                                 product.category = orderItem.product.category.name
-
                                 // Add to list
                                 productDTOList.add(product)
                             }
@@ -91,7 +90,6 @@ class CommandesFragment(
                         PHONE = commandeList[0].phone
                         APARTEMENT = commandeList[0].apartment
                         AVENUE = commandeList[0].avenue
-
                     }
 
                     override fun onFailure(call: Call<List<MyCommandesItem>?>, t: Throwable) {

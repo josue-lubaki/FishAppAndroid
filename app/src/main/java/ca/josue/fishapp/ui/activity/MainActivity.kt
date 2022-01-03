@@ -1,9 +1,12 @@
 package ca.josue.fishapp.ui.activity
 
 import android.os.Bundle
+import android.os.Parcelable
+import android.os.PersistableBundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import ca.josue.fishapp.R
+import ca.josue.fishapp.domain.dto.ProductResponse
 import ca.josue.fishapp.domain.repository.MyOrderRepository
 import ca.josue.fishapp.domain.repository.ProductResponseRepository
 import ca.josue.fishapp.ui.fragment.CommandesFragment
@@ -26,9 +29,13 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var myOrderRepository: MyOrderRepository
 
+    lateinit var homeFragment : HomeFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        homeFragment = HomeFragment(this, productRepository)
 
         navBar = findViewById(R.id.navBar)
         supportActionBar?.hide()
@@ -41,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         navBar.setOnShowListener { item: MeowBottomNavigation.Model ->
             when (item.id) {
                 1 -> {
-                    loadFragment(this, HomeFragment(this, productRepository), R.string.home_page_vedette)
+                    loadFragment(this, homeFragment, R.string.home_page_vedette)
                     return@setOnShowListener
                 }
                 2 -> {
@@ -60,5 +67,13 @@ class MainActivity : AppCompatActivity() {
         // pour éviter les erreurs
         navBar.setOnClickMenuListener { }
         navBar.setOnReselectListener { }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
     }
 }
