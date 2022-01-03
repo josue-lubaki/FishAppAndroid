@@ -1,14 +1,12 @@
 package ca.josue.fishapp.ui.activity
 
 import android.os.Bundle
-import android.os.Parcelable
-import android.os.PersistableBundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import ca.josue.fishapp.R
-import ca.josue.fishapp.domain.dto.ProductResponse
 import ca.josue.fishapp.domain.repository.MyOrderRepository
-import ca.josue.fishapp.domain.repository.ProductResponseRepository
+import ca.josue.fishapp.domain.repository.OrderItemRepository
+import ca.josue.fishapp.domain.repository.ProductRoomRepository
 import ca.josue.fishapp.ui.fragment.CommandesFragment
 import ca.josue.fishapp.ui.fragment.HomeFragment
 import ca.josue.fishapp.ui.fragment.ProfileFragment
@@ -24,10 +22,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Inject
-    lateinit var productRepository : ProductResponseRepository
+    lateinit var productRepository : ProductRoomRepository
 
     @Inject
     lateinit var myOrderRepository: MyOrderRepository
+
+    @Inject
+    lateinit var orderItemRepository: OrderItemRepository
+
 
     lateinit var homeFragment : HomeFragment
 
@@ -52,11 +54,11 @@ class MainActivity : AppCompatActivity() {
                     return@setOnShowListener
                 }
                 2 -> {
-                    loadFragment(this,CommandesFragment(this, myOrderRepository), R.string.commande_detail_page_title)
+                    loadFragment(this,CommandesFragment(this, myOrderRepository, orderItemRepository), R.string.commande_detail_page_title)
                     return@setOnShowListener
                 }
                 3 -> {
-                    loadFragment(this,ProfileFragment(this, myOrderRepository), R.string.profile_page_title)
+                    loadFragment(this,ProfileFragment(this, myOrderRepository, orderItemRepository), R.string.profile_page_title)
                     return@setOnShowListener
                 }
             }

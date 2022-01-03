@@ -1,9 +1,11 @@
-package ca.josue.fishapp.domain.model
+package ca.josue.fishapp.domain.dto
 
-data class Product (
+import ca.josue.fishapp.domain.api.CategoryAPI
+
+data class ProductResponseDTO (
     val __v: Int,
     val _id: String,
-    val category: Category,
+    val category: CategoryAPI,
     val countInStock: Int,
     val dateCreated: String,
     val description: String,

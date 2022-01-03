@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ca.josue.fishapp.R
 import ca.josue.fishapp.domain.repository.MyOrderRepository
+import ca.josue.fishapp.domain.repository.OrderItemRepository
 import ca.josue.fishapp.ui.BaseApplication.Companion.APARTEMENT
 import ca.josue.fishapp.ui.BaseApplication.Companion.AVENUE
 import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
@@ -26,7 +27,8 @@ import ca.josue.fishapp.ui.util.FragmentUtils.Companion.loadFragment
 
 class ProfileFragment(
     private val context : MainActivity,
-    private val myOrderRepository : MyOrderRepository
+    private val myOrderRepository : MyOrderRepository,
+    private val orderItemRepository : OrderItemRepository
     ) : Fragment() {
 
     private lateinit var prefs : SharedPreferences
@@ -74,7 +76,7 @@ class ProfileFragment(
             EMAIL = null
             NAME_USER = null
 
-            loadFragment(context, CommandesFragment(context, myOrderRepository), R.string.commande_detail_page_title)
+            loadFragment(context, CommandesFragment(context, myOrderRepository, orderItemRepository), R.string.commande_detail_page_title)
             MainActivity.navBar.show(2, true)
         }
     }

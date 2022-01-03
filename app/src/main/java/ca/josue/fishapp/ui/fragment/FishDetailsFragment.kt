@@ -3,49 +3,55 @@ package ca.josue.fishapp.ui.fragment
 import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil.setContentView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.R
+import ca.josue.fishapp.domain.model.MyOrdersRoom
 import ca.josue.fishapp.ui.adapter.IAdapter
-import ca.josue.fishapp.domain.dto.ProductResponse
+import ca.josue.fishapp.domain.model.ProductRoom
+import ca.josue.fishapp.domain.repository.OrderItemRepository
+import ca.josue.fishapp.domain.viewModel.OrderItemViewModel
+import ca.josue.fishapp.ui.activity.MainActivity
+import ca.josue.fishapp.ui.adapter.FishAdapterOrder
+import ca.josue.fishapp.ui.adapter.FishItemDecoration
 import com.bumptech.glide.Glide
 
 class FishDetailsFragment(
-        private val adapter : IAdapter,
-        private val currentFishDTO : ProductResponse,
-        private val withDetails : Boolean // s'il doit afficher le details de la commande ou pas
-        ) : Dialog(adapter.getContext()) {
+    private val context : MainActivity,
+    private val idOrder : String,
+    orderItemRepository : OrderItemRepository
+        ) : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private var fishDetailsRecyclerView : RecyclerView? = null
+    private var orderItemVM = OrderItemViewModel(orderItemRepository)
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.popup_fish_details)
-        setComponent()
-        setupCloseButton()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.popup_fish_details, container, false)
     }
 
-    /**
-     * Methode qui permet de fermer le popup lorsqu'on clique sur le close
-     * */
-    private fun setupCloseButton() {
-        findViewById<ImageButton>(R.id.close_button).setOnClickListener {
-            dismiss()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fishDetailsRecyclerView = view.findViewById(R.id.recyclervier_detail_list)
+        fishDetailsRecyclerView?.layoutManager = LinearLayoutManager(context)
+        fishDetailsRecyclerView?.addItemDecoration(FishItemDecoration())
+
+        orderItemVM.getInfoProductByIdOrder(idOrder).observe(this.viewLifecycleOwner){ listProduct ->
+            fishDetailsRecyclerView?.adapter = FishAdapterOrder(context, listProduct)
         }
-    }
-
-    /**
-     * Methode qui permet de mettre à jour les informations du poisson sur le popup
-     * */
-    private fun setComponent() {
-        // Actualiser les informations du poisson
-        val fishImage : ImageView = findViewById(R.id.commande_detail_image)
-        Glide.with(adapter.getContext()).load(Uri.parse(currentFishDTO.imageUrl)).into(fishImage)
-        findViewById<TextView>(R.id.commande_detail_title_article).text = currentFishDTO.name
-        findViewById<TextView>(R.id.commande_detail_description).text = currentFishDTO.description
-        findViewById<TextView>(R.id.commande_detail_price).text = "$${currentFishDTO.price}"
     }
 
 }

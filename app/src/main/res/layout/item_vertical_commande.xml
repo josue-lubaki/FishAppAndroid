@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/corner_yellow"
+    app:cardCornerRadius="@dimen/medium_size"
+    android:elevation="@dimen/item_margin"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_order"
+        style="@style/ColorYellowBackground"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        >
+
+        <View
+            android:id="@+id/view_separation"
+            android:layout_width="1dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="@dimen/default_margin"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_separationH"
+            android:layout_width="10dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="@dimen/default_margin"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/commande_page_date_ordered"
+            style="@style/SubtitleTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingHorizontal="@dimen/little_size"
+            android:text="@string/commande_page_date_ordered"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/medium_size"
+            app:layout_constraintBottom_toBottomOf="@+id/view_separationH"
+            app:layout_constraintEnd_toStartOf="@+id/view_separationH"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/commande_page_total_price"
+            style="@style/SubtitleTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_margin"
+            android:text="@string/commande_page_price"
+            android:textColor="@color/darkRed"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/view_separationH"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view_separationH"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/commande_page_consult_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:background="@drawable/corner_round"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/item_margin"
+            android:text="@string/home_page_consulte"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/view_separationH"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view_separationH" />
+
+        <TextView
+            android:id="@+id/commande_page_status"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/item_margin"
+            android:text="@string/commande_page_status"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view_separationH"
+            app:layout_constraintTop_toTopOf="@+id/view_separationH"
+            style="@style/SubtitleTextStyle"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

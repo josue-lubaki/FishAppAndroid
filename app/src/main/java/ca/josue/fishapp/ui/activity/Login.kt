@@ -14,7 +14,7 @@ import ca.josue.fishapp.R
 import ca.josue.fishapp.data.data_source.network.RetrofitClient
 import ca.josue.fishapp.domain.dto.UserLoginDTO
 import ca.josue.fishapp.domain.dto.UserLoginResponse
-import ca.josue.fishapp.domain.model.User
+import ca.josue.fishapp.domain.model.UserRoom
 import ca.josue.fishapp.domain.repository.UserRepository
 import ca.josue.fishapp.ui.BaseApplication
 import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
@@ -127,8 +127,8 @@ class Login : AppCompatActivity() {
 
                     val userLogged = response.body()!!
 
-                    val newUser = User(
-                        id = userLogged.id,
+                    val newUser = UserRoom(
+                        idUser = userLogged.id,
                         email = userLogged.email,
                         name = userLogged.name,
                         token = userLogged.token,
@@ -141,7 +141,7 @@ class Login : AppCompatActivity() {
                         editor.apply{
                             putString(getString(R.string.save_username_key), newUser.email)
                             putString(getString(R.string.save_password_key), user.password)
-                            putString("ID_USER_CURRENT", newUser.id)
+                            putString("ID_USER_CURRENT", newUser.idUser)
                             putString("TOKEN", newUser.token)
                             putString("NAME_USER", newUser.name)
                         }.apply()
@@ -161,7 +161,7 @@ class Login : AppCompatActivity() {
                     NAME_USER = userLogged.name
 
                     // Récupèration des commandes Refresh la Liste
-                    CommandesFragment.commandeList.clear()
+                    CommandesFragment.ordersListRoom.clear()
                     CommandesFragment.getCommandesUser()
 
                     if(ID_USER_CURRENT != null){

@@ -43,5 +43,11 @@
     <string name="login">Se Connecter</string>
     <string name="save_username_key">username_prefs</string>
     <string name="save_password_key">password_prefs_key</string>
+    <string name="commande_page_date_ordered">date d\'achat</string>
+    <string name="commande_page_status">Etat</string>
+    <string name="detail_page_category">Category</string>
+    <string name="detail_page_date_ordered">date d\'achat</string>
+    <string name="detail_page_status">status</string>
+    <string name="fermer">Fermer</string>
 
 </resources>

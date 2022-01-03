@@ -23,5 +23,14 @@ class FragmentUtils {
             transaction.addToBackStack(null) // annuler le retour vers ce composant
             transaction.commit()
         }
+
+        /**
+         * Methode qui permet de récupèrer la date sous un bon format
+         * */
+        fun convertDate(str: String) : String{
+            // 2021-19-15 T 03:1515.02Z
+            val d = str.split("T")
+            return d[0]
+        }
     }
 }

@@ -1,35 +1,36 @@
 package ca.josue.fishapp.data.repository
 
 import androidx.lifecycle.LiveData
-import ca.josue.fishapp.data.data_source.local.dao.ProductResponseDao
-import ca.josue.fishapp.domain.dto.ProductResponse
-import ca.josue.fishapp.domain.model.Product
-import ca.josue.fishapp.domain.repository.ProductResponseRepository
+import ca.josue.fishapp.data.data_source.local.dao.ProductRoomDao
+import ca.josue.fishapp.domain.model.ProductRoom
+import ca.josue.fishapp.domain.repository.ProductRoomRepository
 
 class ProductResponseRepositoryImpl(
-    private val dao : ProductResponseDao
-) : ProductResponseRepository {
-    override fun getProductResponses(): LiveData<List<ProductResponse>> {
-        return dao.getProductResponses()
+    private val dao : ProductRoomDao
+) : ProductRoomRepository {
+    override fun getProductRooms(): LiveData<List<ProductRoom>> {
+        return dao.getProductRooms()
     }
 
-    override suspend fun getProductResponseById(id: String): ProductResponse? {
-        return dao.getProductResponseById(id)
+    override suspend fun getProductRoomById(id: String): ProductRoom? {
+        return dao.getProductRoomById(id)
     }
 
-    override fun insertProductResponse(productResponse: ProductResponse) {
-        return dao.insertProductResponse(productResponse)
+    override suspend fun insertProductRoom(productRoom: ProductRoom) {
+        return dao.insertProductRoom(productRoom)
     }
 
-    override suspend fun deleteProductResponse(productResponse: ProductResponse) {
-        return dao.deleteProductResponse(productResponse)
+    override suspend fun insertProductRooms(productRooms: MutableList<ProductRoom>) {
+        return dao.insertProductRooms(productRooms)
     }
 
-    override suspend fun deleteProductResponses() {
-        return dao.deleteProductResponses()
+    override suspend fun deleteProductRoom(productRoom: ProductRoom) {
+        return dao.deleteProductRoom(productRoom)
     }
 
-    override suspend fun insertProductResponses(productResponses: MutableList<ProductResponse>) {
-        return dao.insertProductResponses(productResponses)
+    override suspend fun deleteProductRooms() {
+        return dao.deleteProductRooms()
     }
+
+
 }

@@ -13,7 +13,10 @@
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/commandes_fragment_to_login.xml" value="0.2" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/fragment_home_empty.xml" value="0.1" />
+        <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/item_horizontal_article.xml" value="0.27447916666666666" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/item_vertical_article.xml" value="0.4" />
+        <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/item_vertical_commande.xml" value="0.264" />
+        <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/order_vertical_commande.xml" value="0.2734375" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/popup_fish_details.xml" value="0.27447916666666666" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/layout/profile_fragment.xml" value="0.1334853090172239" />
         <entry key="..\:/GitHub/Fish_Project/Android/app/src/main/res/mipmap-xxxhdpi/fish_logo.xml" value="0.1055" />

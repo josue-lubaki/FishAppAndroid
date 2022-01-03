@@ -2,29 +2,28 @@ package ca.josue.fishapp.data.data_source.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ca.josue.fishapp.domain.dto.MyOrderDTO
-import kotlinx.coroutines.flow.Flow
+import ca.josue.fishapp.domain.model.MyOrdersRoom
 
 @Dao
 interface MyOrderDao {
-    @Query("SELECT * FROM myorderdto")
-    fun getMyOrders() : LiveData<List<MyOrderDTO>>
+    @Query("SELECT * FROM myordersroom")
+    fun getMyOrders() : LiveData<List<MyOrdersRoom>>
 
-    @Query("SELECT * FROM myorderdto WHERE idOrderItem = :idOrder")
-    suspend fun getMyOrderById(idOrder : String) : MyOrderDTO?
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMyOrder(myOrder : MyOrderDTO)
+    @Query("SELECT * FROM myordersroom WHERE idOrder = :idOrder")
+    suspend fun getMyOrderById(idOrder : String) : MyOrdersRoom?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMyOrders(myOrders : MutableList<MyOrderDTO>)
+    suspend fun insertMyOrder(myOrder : MyOrdersRoom)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMyOrders(myOrders : MutableList<MyOrdersRoom>)
 
     @Update
-    suspend fun updateMyOrder(myOrder : MyOrderDTO)
+    suspend fun updateMyOrder(myOrder : MyOrdersRoom)
     
     @Delete
-    suspend fun deleteMyOrder(myOrder : MyOrderDTO)
+    suspend fun deleteMyOrder(myOrder : MyOrdersRoom)
 
-    @Query("DELETE FROM myorderdto")
+    @Query("DELETE FROM myordersroom")
     suspend fun deleteMyOrders()
 }

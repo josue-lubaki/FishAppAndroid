@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.R
-import ca.josue.fishapp.domain.repository.ProductResponseRepository
-import ca.josue.fishapp.domain.viewModel.ProductResponseViewModel
+import ca.josue.fishapp.domain.repository.ProductRoomRepository
+import ca.josue.fishapp.domain.viewModel.ProductRoomViewModel
 import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.ui.activity.Splash.Companion.fishListProduct
 import ca.josue.fishapp.ui.activity.Splash.Companion.getAllProductsViaAPI
-import ca.josue.fishapp.ui.adapter.FishAdapter
+import ca.josue.fishapp.ui.adapter.FishAdapterProduct
 import ca.josue.fishapp.ui.adapter.FishItemDecoration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -22,12 +22,12 @@ import kotlinx.coroutines.runBlocking
 
 class HomeFragment(
     private val context : MainActivity,
-    productRepository : ProductResponseRepository
+    productRepository : ProductRoomRepository
     ): Fragment() {
 
     private var containerThis : ViewGroup? = null
 
-    private var productResponseVM = ProductResponseViewModel(productRepository)
+    private var productResponseVM = ProductRoomViewModel(productRepository)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         containerThis = container
@@ -43,8 +43,10 @@ class HomeFragment(
         super.onViewCreated(view, savedInstanceState)
 
         runBlocking(Dispatchers.Default){
+
             getAllProductsViaAPI()
-            productResponseVM.insertProdutResponses(fishListProduct)
+            if(fishListProduct.isNotEmpty())
+                productResponseVM.insertProdutRooms(fishListProduct)
         }
 
         // Retrieve RecyclerView Horizontal
@@ -55,7 +57,7 @@ class HomeFragment(
         horizontalRecyclerView.setHasFixedSize(true)
         horizontalRecyclerView.layoutManager = llm
         horizontalRecyclerView.adapter =
-            FishAdapter(context, R.layout.item_horizontal_article)
+            FishAdapterProduct(context, R.layout.item_horizontal_article)
 
         // Retrieve Vertical RecyclerView
         val verticalRecyclerView: RecyclerView =
@@ -63,16 +65,16 @@ class HomeFragment(
         verticalRecyclerView.setHasFixedSize(true)
         verticalRecyclerView.addItemDecoration(FishItemDecoration())
         verticalRecyclerView.adapter =
-            FishAdapter(context, R.layout.item_vertical_article)
+            FishAdapterProduct(context, R.layout.item_vertical_article)
 
-        productResponseVM.getProductResponses().observe(this.viewLifecycleOwner) { productResponseList ->
+        productResponseVM.getProductRooms().observe(this.viewLifecycleOwner) { productResponseList ->
 
             if(productResponseList.isEmpty()) {
                 LayoutInflater.from(context).inflate(R.layout.fragment_home_empty, containerThis, false)
             }
             else {
-                (horizontalRecyclerView.adapter as FishAdapter).addProduct(productResponseList.filter { it.isFeature })
-                (verticalRecyclerView.adapter as FishAdapter).addProduct(productResponseList)
+                (horizontalRecyclerView.adapter as FishAdapterProduct).addProduct(productResponseList.filter { it.isFeature })
+                (verticalRecyclerView.adapter as FishAdapterProduct).addProduct(productResponseList)
             }
         }
     }

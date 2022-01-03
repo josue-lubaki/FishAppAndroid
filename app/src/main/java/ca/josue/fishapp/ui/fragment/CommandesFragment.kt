@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.ui.BaseApplication.Companion.APARTEMENT
@@ -21,37 +20,38 @@ import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.ui.adapter.CommandeAdapter
 import ca.josue.fishapp.ui.adapter.FishItemDecoration
-import ca.josue.fishapp.domain.model.*
-import ca.josue.fishapp.domain.dto.MyOrderDTO
+import ca.josue.fishapp.domain.model.MyOrdersRoom
 import ca.josue.fishapp.data.data_source.network.RetrofitClient
-import ca.josue.fishapp.domain.dto.UserLoginDTO
+import ca.josue.fishapp.domain.api.OrderItemAPI
+import ca.josue.fishapp.domain.api.OrdersAPI
+import ca.josue.fishapp.domain.model.OrderItemRoom
 import ca.josue.fishapp.domain.repository.MyOrderRepository
+import ca.josue.fishapp.domain.repository.OrderItemRepository
 import ca.josue.fishapp.domain.viewModel.MyOrderViewModel
+import ca.josue.fishapp.domain.viewModel.OrderItemViewModel
 import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
 import ca.josue.fishapp.ui.BaseApplication.Companion.NAME_USER
 import ca.josue.fishapp.ui.activity.Splash
-import ca.josue.fishapp.ui.adapter.FishAdapter
-import ca.josue.fishapp.ui.util.FragmentUtils.Companion.loadFragment
+import ca.josue.fishapp.ui.util.FragmentUtils.Companion.convertDate
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
 
 class CommandesFragment(
     private val context : MainActivity,
-    val myOrderRepository : MyOrderRepository
+    myOrderRepository : MyOrderRepository,
+    private val orderItemRepository : OrderItemRepository
     ) : Fragment() {
 
     private var myOrderVM = MyOrderViewModel(myOrderRepository)
+    private var orderItemVM = OrderItemViewModel(orderItemRepository)
     private var commandesRecyclerView : RecyclerView? = null
 
     companion object{
-        val commandeList = arrayListOf<MyCommandesItem>()
-        val productDTOList = arrayListOf<MyOrderDTO>()
+        val ordersItemsListRoom = arrayListOf<OrderItemRoom>()
+        val ordersListRoom = arrayListOf<MyOrdersRoom>()
 
         /***
          * Methode qui permet de récupèrer toutes les commandes en cours de l'Utilisateur connecté
@@ -60,39 +60,47 @@ class CommandesFragment(
             RetrofitClient
                 .getApiService()
                 .getMyCommands(ID_USER_CURRENT!!)
-                .enqueue(object : Callback<List<MyCommandesItem>?> {
-                    override fun onResponse(call: Call<List<MyCommandesItem>?>, response: Response<List<MyCommandesItem>?>) {
+                .enqueue(object : Callback<List<OrdersAPI>?> {
+                    override fun onResponse(call: Call<List<OrdersAPI>?>, response: Response<List<OrdersAPI>?>) {
                         if (!response.isSuccessful)
                             return
 
                         val responseList = response.body()!!
-                        for (order in responseList) {
-                            commandeList.add(order)
-                        }
 
-                        responseList.forEach {myCommandItem ->
-                            myCommandItem.orderItems.forEach {orderItem ->
-                                val product = MyOrderDTO()
-                                product.status = myCommandItem.status
-                                product.quantity = orderItem.quantity
-                                product.name = orderItem.product.name
-                                product.description = orderItem.product.description
-                                product.price = orderItem.product.price
-                                product.imageURL = orderItem.product.image
-                                product.idOrderItem = orderItem.id
-                                product.category = orderItem.product.category.name
+                        responseList.forEach { commande : OrdersAPI ->
+                            val orderCurrentUser = MyOrdersRoom()
+                            orderCurrentUser.idUser = commande.user
+                            orderCurrentUser.apartment = commande.apartment
+                            orderCurrentUser.avenue = commande.avenue
+                            orderCurrentUser.idOrder = commande.id
+                            orderCurrentUser.city = commande.city
+                            orderCurrentUser.dateOrdered = convertDate(commande.dateOrdered)
+                            orderCurrentUser.phone = commande.phone
+                            orderCurrentUser.status = commande.status
+                            orderCurrentUser.totalPrice = commande.totalPrice
+                            // Add to list
+                            ordersListRoom.add(orderCurrentUser)
+
+                            // Pour Chaque Item de la commande
+                            commande.orderItems.forEach { orderItem : OrderItemAPI ->
+                                val orderItemCurrentUser = OrderItemRoom()
+                                orderItemCurrentUser.idOrder = commande.id
+                                orderItemCurrentUser.idOrderItem = orderItem.id
+                                orderItemCurrentUser.idProduct = orderItem.product.id
+                                orderItemCurrentUser.quantity = orderItem.quantity
+
                                 // Add to list
-                                productDTOList.add(product)
+                                ordersItemsListRoom.add(orderItemCurrentUser)
                             }
                         }
 
                         // récupèrer le phone
-                        PHONE = commandeList[0].phone
-                        APARTEMENT = commandeList[0].apartment
-                        AVENUE = commandeList[0].avenue
+                        PHONE = ordersListRoom[0].phone
+                        APARTEMENT = ordersListRoom[0].apartment
+                        AVENUE = ordersListRoom[0].avenue
                     }
 
-                    override fun onFailure(call: Call<List<MyCommandesItem>?>, t: Throwable) {
+                    override fun onFailure(call: Call<List<OrdersAPI>?>, t: Throwable) {
                         println("Erreur lors de la recuperation des commandes : ${t.message}")
                     }
                 })
@@ -106,9 +114,9 @@ class CommandesFragment(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when {
-            productDTOList.isNotEmpty() && ID_USER_CURRENT != null  -> inflater.inflate(R.layout.commandes_fragment, container, false)
+            ordersListRoom.isNotEmpty() && ID_USER_CURRENT != null  -> inflater.inflate(R.layout.commandes_fragment, container, false)
             ID_USER_CURRENT == null -> inflater.inflate(R.layout.commandes_fragment_to_login, container, false)
-            productDTOList.isEmpty() && ID_USER_CURRENT == null -> inflater.inflate(R.layout.commandes_fragment_empty, container, false)
+            ordersListRoom.isEmpty() && ID_USER_CURRENT == null -> inflater.inflate(R.layout.commandes_fragment_empty, container, false)
             else -> inflater.inflate(R.layout.commandes_fragment_to_login, container, false)
         }
     }
@@ -130,20 +138,22 @@ class CommandesFragment(
             EMAIL = emailPrefs
         }
 
-       if(productDTOList.isNotEmpty()){
+       if(ordersListRoom.isNotEmpty()){
 
            commandesRecyclerView = view.findViewById(R.id.vertical_recyclerview_commandes)
 
            commandesRecyclerView?.layoutManager = LinearLayoutManager(context)
            commandesRecyclerView?.addItemDecoration(FishItemDecoration())
 
+           // enregistrer les contenus dans Room
            runBlocking(Dispatchers.Default){
-               myOrderVM.insertMyOrders(productDTOList)
+               myOrderVM.insertMyOrders(ordersListRoom)
+               orderItemVM.insertOrderItems(ordersItemsListRoom)
            }
        }
 
         myOrderVM.getMyOrders().observe(this.viewLifecycleOwner) { myOrderList ->
-            commandesRecyclerView?.adapter = CommandeAdapter(context, myOrderList)
+            commandesRecyclerView?.adapter = CommandeAdapter(context, myOrderList, orderItemRepository)
         }
 
         loginBtn.setOnClickListener {
@@ -151,11 +161,10 @@ class CommandesFragment(
             if(ID_USER_CURRENT == null) {
                 val intent = Intent(context.baseContext, Login::class.java)
                 startActivity(intent)
-                context.finish()
             }
             else{
                 // retrieve All commands for user
-                productDTOList.clear()
+                ordersListRoom.clear()
                 getCommandesUser()
                 MainActivity.navBar.show(1, true)
                 Toast.makeText(context, "Connexion réussie", Toast.LENGTH_LONG).show()

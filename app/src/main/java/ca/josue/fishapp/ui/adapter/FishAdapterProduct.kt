@@ -1,6 +1,7 @@
 package ca.josue.fishapp.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -11,21 +12,23 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.R
 import ca.josue.fishapp.ui.fragment.FishDetailsFragment
-import ca.josue.fishapp.domain.dto.ProductResponse
+import ca.josue.fishapp.domain.model.ProductRoom
+import ca.josue.fishapp.ui.BaseApplication
+import ca.josue.fishapp.ui.activity.DetailsProduct
 import com.bumptech.glide.Glide
 
-class FishAdapter(
+class FishAdapterProduct(
     private val mainContext: MainActivity,
     private val layoutId : Int
-        ) : RecyclerView.Adapter<FishAdapter.ViewHolder>(), IAdapter{
+        ) : RecyclerView.Adapter<FishAdapterProduct.ViewHolder>(), IAdapter{
 
-    private var fishListDTO : List<ProductResponse> = arrayListOf()
+    private var fishListDTO : List<ProductRoom> = arrayListOf()
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        val fishImage : ImageView = view.findViewById(R.id.home_page_image_article)
-        val fishName : TextView = view.findViewById(R.id.home_page_title_article)
-        val fishPrice : TextView = view.findViewById(R.id.home_page_price)
-        val fishConsultButton : TextView = view.findViewById(R.id.home_page_consult_btn)
+        val fishImage : ImageView = view.findViewById(R.id.order_item_image)
+        val fishName : TextView = view.findViewById(R.id.order_item_title)
+        val fishPrice : TextView = view.findViewById(R.id.order_item_price)
+        val fishConsultButton : TextView = view.findViewById(R.id.order_item_consult)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,17 +45,21 @@ class FishAdapter(
 
         // Intéragir lors du click sur l'image d'un poisson ou sur le button "consulte" et afficher le popup
         holder.itemView.setOnClickListener {
-            FishDetailsFragment(this, currentFish, false).show()
+            BaseApplication.PRODUCTVIEW = currentFish
+            val intent = Intent(mainContext, DetailsProduct::class.java)
+            mainContext.startActivity(intent)
         }
 
         holder.fishConsultButton.setOnClickListener {
-            FishDetailsFragment(this, currentFish, false).show()
+            BaseApplication.PRODUCTVIEW = currentFish
+            val intent = Intent(mainContext, DetailsProduct::class.java)
+            mainContext.startActivity(intent)
         }
 
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addProduct(list : List<ProductResponse>){
+    fun addProduct(list : List<ProductRoom>){
         fishListDTO = list
         notifyDataSetChanged()
     }

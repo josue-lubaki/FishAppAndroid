@@ -1,6 +1,7 @@
 package ca.josue.fishapp.ui
 
 import android.app.Application
+import ca.josue.fishapp.domain.model.ProductRoom
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -16,5 +17,6 @@ class BaseApplication : Application(){
         var AVENUE : String? = null
         var NAME_USER : String? = null
         var SAVEDME : Boolean = false
+        var PRODUCTVIEW : ProductRoom? = null
     }
 }

@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 
 // timestamp : le dernier time de connection
 @Entity
-class User (
+class UserRoom (
     @PrimaryKey
-    val id: String,
+    val idUser: String,
     val email: String,
     var name: String,
     val token: String,

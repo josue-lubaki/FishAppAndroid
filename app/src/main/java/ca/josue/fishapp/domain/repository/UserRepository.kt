@@ -1,11 +1,11 @@
 package ca.josue.fishapp.domain.repository
 
-import ca.josue.fishapp.domain.model.User
+import ca.josue.fishapp.domain.model.UserRoom
 
 interface UserRepository {
-    suspend fun getUserById(id : String) : User?
-    suspend fun insertUser(user : User)
-    suspend fun deleteUser(user: User)
-    suspend fun updateUser(user: User)
+    suspend fun getUserById(id : String) : UserRoom?
+    suspend fun insertUser(user : UserRoom)
+    suspend fun deleteUser(user: UserRoom)
+    suspend fun updateUser(user: UserRoom)
     suspend fun deleteUsers()
 }

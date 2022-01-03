@@ -1,6 +1,6 @@
-package ca.josue.fishapp.domain.model
+package ca.josue.fishapp.domain.api
 
-data class MyCommandesItem(
+data class OrdersAPI(
     val __v: Int,
     val _id: String,
     val apartment: String,
@@ -11,7 +11,7 @@ data class MyCommandesItem(
     val dateOrdered: String,
     val id: String,
     val notes: String,
-    val orderItems: List<OrderItem>,
+    val orderItems: List<OrderItemAPI>,
     val phone: String,
     val quartier: String,
     val status: String,

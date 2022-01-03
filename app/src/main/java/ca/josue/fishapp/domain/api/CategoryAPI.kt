@@ -1,6 +1,6 @@
-package ca.josue.fishapp.domain.model
+package ca.josue.fishapp.domain.api
 
-data class Category(
+data class CategoryAPI(
     val __v: Int,
     val _id: String,
     val color: String,

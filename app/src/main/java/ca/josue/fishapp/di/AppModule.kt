@@ -1,22 +1,23 @@
 package ca.josue.fishapp.di
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
 import ca.josue.fishapp.data.data_source.local.FishDatabase
 import ca.josue.fishapp.data.repository.MyOrderRepositoryImpl
+import ca.josue.fishapp.data.repository.OrderItemRepositoryImpl
 import ca.josue.fishapp.data.repository.ProductResponseRepositoryImpl
 import ca.josue.fishapp.data.repository.UserRepositoryImpl
 import ca.josue.fishapp.domain.repository.MyOrderRepository
-import ca.josue.fishapp.domain.repository.ProductResponseRepository
+import ca.josue.fishapp.domain.repository.OrderItemRepository
+import ca.josue.fishapp.domain.repository.ProductRoomRepository
 import ca.josue.fishapp.domain.repository.UserRepository
 import ca.josue.fishapp.domain.viewModel.MyOrderViewModel
-import ca.josue.fishapp.domain.viewModel.ProductResponseViewModel
+import ca.josue.fishapp.domain.viewModel.OrderItemViewModel
+import ca.josue.fishapp.domain.viewModel.ProductRoomViewModel
 import ca.josue.fishapp.ui.activity.MainActivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -50,14 +51,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideProductResponseRepository(db : FishDatabase) : ProductResponseRepository {
+    fun provideProductResponseRepository(db : FishDatabase) : ProductRoomRepository {
         return ProductResponseRepositoryImpl(db.productDao)
     }
 
     @Provides
     @Singleton
-    fun provideProductResponseVIewModel(repo : ProductResponseRepository) : ProductResponseViewModel {
-        return ProductResponseViewModel(repo)
+    fun provideProductResponseVIewModel(repo : ProductRoomRepository) : ProductRoomViewModel {
+        return ProductRoomViewModel(repo)
     }
 
     @Provides
@@ -71,6 +72,19 @@ object AppModule {
     fun provideMyOrderViewModel(repo : MyOrderRepository) : MyOrderViewModel {
         return MyOrderViewModel(repo)
     }
+
+    @Provides
+    @Singleton
+    fun provideOrderItemRepository(db : FishDatabase) : OrderItemRepository{
+        return OrderItemRepositoryImpl(db.orderItemDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOrderItemViewModel(repo : OrderItemRepository) : OrderItemViewModel {
+        return OrderItemViewModel(repo)
+    }
+
 
 
 }
