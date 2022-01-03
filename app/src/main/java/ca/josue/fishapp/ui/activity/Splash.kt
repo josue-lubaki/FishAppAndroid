@@ -33,6 +33,36 @@ class Splash : AppCompatActivity() {
 
     companion object{
         val fishListProduct = arrayListOf<ProductResponse>()
+        /**
+         * Methode qui permet de récupèrer tous les produits
+         * */
+        fun getAllProductsViaAPI() {
+            val retrofitProduct = RetrofitClient.getApiService().getProducts()
+            retrofitProduct.enqueue(object : Callback<List<Product>?> {
+                override fun onResponse(call: Call<List<Product>?>, response: Response<List<Product>?>) {
+                    if (!response.isSuccessful)
+                        return
+
+                    val list = (response.body() as MutableList<Product>?)!!
+                    list.forEach { product ->
+                        val prod = ProductResponse(
+                            product.id,
+                            product.name,
+                            product.category.name,
+                            product.price.toDouble(),
+                            product.image,
+                            product.description,
+                            product.isFeatured
+                        )
+                        fishListProduct.add(prod)
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Product>?>, t: Throwable) {
+                    println("Error retrofit ${t.message}")
+                }
+            })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,34 +92,5 @@ class Splash : AppCompatActivity() {
         }
     }
 
-    /**
-     * Methode qui permet de récupèrer tous les produits
-     * */
-    private fun getAllProductsViaAPI() {
-        val retrofitProduct = RetrofitClient.getApiService().getProducts()
-        retrofitProduct.enqueue(object : Callback<List<Product>?> {
-            override fun onResponse(call: Call<List<Product>?>, response: Response<List<Product>?>) {
-                if (!response.isSuccessful)
-                    return
 
-                val list = (response.body() as MutableList<Product>?)!!
-                list.forEach { product ->
-                    val prod = ProductResponse(
-                        product.id,
-                        product.name,
-                        product.category.name,
-                        product.price.toDouble(),
-                        product.image,
-                        product.description,
-                        product.isFeatured
-                    )
-                    fishListProduct.add(prod)
-                }
-            }
-
-            override fun onFailure(call: Call<List<Product>?>, t: Throwable) {
-                println("Error retrofit ${t.message}")
-            }
-        })
-    }
 }

@@ -1,5 +1,6 @@
 package ca.josue.fishapp.ui.adapter
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +16,10 @@ import com.bumptech.glide.Glide
 
 class FishAdapter(
     private val mainContext: MainActivity,
-    private var fishListDTO : List<ProductResponse>,
     private val layoutId : Int
         ) : RecyclerView.Adapter<FishAdapter.ViewHolder>(), IAdapter{
+
+    private var fishListDTO : List<ProductResponse> = arrayListOf()
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val fishImage : ImageView = view.findViewById(R.id.home_page_image_article)
@@ -49,6 +51,11 @@ class FishAdapter(
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun addProduct(list : List<ProductResponse>){
+        fishListDTO = list
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = fishListDTO.size
     override fun getContext(): MainActivity {
