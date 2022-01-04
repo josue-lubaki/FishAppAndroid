@@ -23,9 +23,11 @@
 <p>
 <img src="https://imgur.com/7jBjl6c.png" width=280 height=480 /> &emsp;
 <img src="https://imgur.com/VNONXNS.png" width=280 height=480 /> &emsp;
-<img src="https://imgur.com/odLaVSp.png" width=280 height=480 /> &emsp; 
 </p>
 <p>
+<img src="https://imgur.com/odLaVSp.png" width=280 height=480 /> &emsp; 
 <img src="https://imgur.com/229JRNX.png" width=280 height=480 /> &emsp;
+</p>
+<p>
 <img src="https://imgur.com/Cc73lL6.png" width=585 height=480 /> &emsp;
 </p>
