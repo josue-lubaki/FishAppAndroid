@@ -43,7 +43,6 @@ class HomeFragment(
         super.onViewCreated(view, savedInstanceState)
 
         runBlocking(Dispatchers.Default){
-
             getAllProductsViaAPI()
             if(fishListProduct.isNotEmpty())
                 productResponseVM.insertProdutRooms(fishListProduct)

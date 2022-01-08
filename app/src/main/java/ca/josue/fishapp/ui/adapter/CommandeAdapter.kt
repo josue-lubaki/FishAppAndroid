@@ -42,7 +42,6 @@ class CommandeAdapter(
 
         holder.consultBtn.setOnClickListener {
             loadFragment(mainContext, FishDetailsFragment(mainContext, currentCommande.idOrder, orderItemRepository),R.string.commande_page_title)
-
         }
 
         holder.blocOrder.setOnClickListener {

@@ -12,14 +12,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import ca.josue.fishapp.R
 import ca.josue.fishapp.data.data_source.network.RetrofitClient
+import ca.josue.fishapp.domain.dto.UserInfoResponse
 import ca.josue.fishapp.domain.dto.UserLoginDTO
 import ca.josue.fishapp.domain.dto.UserLoginResponse
 import ca.josue.fishapp.domain.model.UserRoom
 import ca.josue.fishapp.domain.repository.UserRepository
 import ca.josue.fishapp.ui.BaseApplication
+import ca.josue.fishapp.ui.BaseApplication.Companion.APARTEMENT
+import ca.josue.fishapp.ui.BaseApplication.Companion.AVENUE
 import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
 import ca.josue.fishapp.ui.BaseApplication.Companion.ID_USER_CURRENT
 import ca.josue.fishapp.ui.BaseApplication.Companion.NAME_USER
+import ca.josue.fishapp.ui.BaseApplication.Companion.PHONE
 import ca.josue.fishapp.ui.BaseApplication.Companion.SAVEDME
 import ca.josue.fishapp.ui.fragment.CommandesFragment
 import ca.josue.fishapp.ui.util.CheckForm.Companion.checkEmailPasswordValid
@@ -31,6 +35,7 @@ import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,10 +44,35 @@ class Login : AppCompatActivity() {
     lateinit var preferences: SharedPreferences
     lateinit var emailPreference: String
     lateinit var passwordPreferences: String
-    lateinit var switch_save_credentials : SwitchCompat
+    private lateinit var switchSaveCredentials : SwitchCompat
 
     companion object{
         const val NAME_PREFERENCE = "Credentials"
+
+        fun getInformationUser(idUser : String) {
+            RetrofitClient
+                .getApiService()
+                .getInfoUser(idUser)
+                .enqueue(object : Callback<UserInfoResponse?> {
+                    override fun onResponse(
+                        call: Call<UserInfoResponse?>,
+                        response: Response<UserInfoResponse?>
+                    ) {
+                        if (!response.isSuccessful)
+                            return
+
+                        val userInfo = response.body()!!
+                        AVENUE = userInfo.avenue
+                        APARTEMENT = userInfo.apartment
+                        PHONE = userInfo.phone
+                        EMAIL = userInfo.email
+                    }
+
+                    override fun onFailure(call: Call<UserInfoResponse?>, t: Throwable) {
+                        println("Erreur lors de la recuperation des commandes : ${t.message}")
+                    }
+                })
+        }
     }
 
     @Inject
@@ -71,7 +101,7 @@ class Login : AppCompatActivity() {
         }
 
         // récupèration des components
-        switch_save_credentials = findViewById(R.id.switch_save_credentials)
+        switchSaveCredentials = findViewById(R.id.switch_save_credentials)
         val inputEmail : TextInputEditText = findViewById(R.id.email_input_txt)
         val inputPassword : TextInputEditText = findViewById(R.id.password_toggle_txt)
         var inputEmailBool = true
@@ -87,7 +117,7 @@ class Login : AppCompatActivity() {
         }
 
         /* Listener pour le switch */
-        switch_save_credentials.setOnCheckedChangeListener {
+        switchSaveCredentials.setOnCheckedChangeListener {
                 _: CompoundButton?, isChecked: Boolean ->
             // Si le switch est activé
             SAVEDME = isChecked
@@ -104,7 +134,7 @@ class Login : AppCompatActivity() {
         checkEmailPasswordValid(inputEmail, inputPassword)
 
         val user = UserLoginDTO(
-            inputEmail.text.toString(),
+            inputEmail.text.toString().lowercase(Locale.getDefault()),
             inputPassword.text.toString()
         )
 
@@ -131,8 +161,7 @@ class Login : AppCompatActivity() {
                         idUser = userLogged.id,
                         email = userLogged.email,
                         name = userLogged.name,
-                        token = userLogged.token,
-                        timestamp = System.currentTimeMillis()
+                        token = userLogged.token
                     )
 
                     if(SAVEDME){
@@ -145,11 +174,9 @@ class Login : AppCompatActivity() {
                             putString("TOKEN", newUser.token)
                             putString("NAME_USER", newUser.name)
                         }.apply()
-
-                        Toast.makeText(this@Login, "Data saved", Toast.LENGTH_LONG).show()
                     }
 
-                    runBlocking(Dispatchers.Default){
+                    runBlocking {
                         userRepository.insertUser(newUser)
                     }
 
@@ -163,6 +190,9 @@ class Login : AppCompatActivity() {
                     // Récupèration des commandes Refresh la Liste
                     CommandesFragment.ordersListRoom.clear()
                     CommandesFragment.getCommandesUser()
+
+                    // Récupèrer les informations de l'utilisateur
+                    ID_USER_CURRENT?.let { getInformationUser(it) }
 
                     if(ID_USER_CURRENT != null){
                         val intent = Intent(this@Login, MainActivity::class.java)
@@ -179,4 +209,6 @@ class Login : AppCompatActivity() {
                 }
             })
     }
+
+
 }

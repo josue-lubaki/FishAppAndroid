@@ -39,7 +39,7 @@ class FishAdapterProduct(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentFish = fishListDTO[position]
 
-        Glide.with(mainContext).load(Uri.parse(currentFish.imageUrl)).into(holder.fishImage)
+        Glide.with(mainContext).load(Uri.parse(currentFish.imageUrl)).placeholder(R.drawable.nofind).into(holder.fishImage)
         holder.fishName.text = currentFish.name
         holder.fishPrice.text = "$${currentFish.price.toInt()}"
 

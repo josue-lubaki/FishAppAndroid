@@ -49,5 +49,6 @@
     <string name="detail_page_date_ordered">date d\'achat</string>
     <string name="detail_page_status">status</string>
     <string name="fermer">Fermer</string>
+    <string name="tiret">-</string>
 
 </resources>

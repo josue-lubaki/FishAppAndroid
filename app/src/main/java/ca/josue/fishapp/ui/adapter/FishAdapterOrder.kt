@@ -38,7 +38,7 @@ class FishAdapterOrder(
         // bind data
         holder.fishName.text = currentProduct.name
         holder.fishPrice.text = "$${currentProduct.price.toInt()}"
-        Glide.with(context).load(currentProduct.imageUrl).into(holder.fishImage)
+        Glide.with(context).load(currentProduct.imageUrl).placeholder(R.drawable.nofind).into(holder.fishImage)
 
         holder.fishConsultButton.setOnClickListener {
             val intent = Intent(context, DetailsProduct::class.java)

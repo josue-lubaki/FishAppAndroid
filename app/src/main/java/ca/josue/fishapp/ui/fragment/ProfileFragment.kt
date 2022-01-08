@@ -10,8 +10,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ca.josue.fishapp.R
+import ca.josue.fishapp.domain.model.UserRoom
 import ca.josue.fishapp.domain.repository.MyOrderRepository
 import ca.josue.fishapp.domain.repository.OrderItemRepository
+import ca.josue.fishapp.domain.repository.UserRepository
 import ca.josue.fishapp.ui.BaseApplication.Companion.APARTEMENT
 import ca.josue.fishapp.ui.BaseApplication.Companion.AVENUE
 import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
@@ -23,12 +25,15 @@ import ca.josue.fishapp.ui.BaseApplication.Companion.TOKEN
 import ca.josue.fishapp.ui.activity.Login
 import ca.josue.fishapp.ui.activity.MainActivity
 import ca.josue.fishapp.ui.util.FragmentUtils.Companion.loadFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 
 class ProfileFragment(
     private val context : MainActivity,
     private val myOrderRepository : MyOrderRepository,
-    private val orderItemRepository : OrderItemRepository
+    private val orderItemRepository : OrderItemRepository,
+    private val userRepository: UserRepository
     ) : Fragment() {
 
     private lateinit var prefs : SharedPreferences
@@ -65,20 +70,43 @@ class ProfileFragment(
             editor.clear()
             editor.apply()
 
-            Toast.makeText(context, "${NAME_USER.toString()} logged out...", Toast.LENGTH_SHORT).show()
+            val currentUser = ID_USER_CURRENT?.let { it1 ->
+                EMAIL?.let { it2 ->
+                    NAME_USER?.let { it3 ->
+                        TOKEN?.let { it4 ->
+                            UserRoom(
+                                it1,
+                                it2,
+                                it3,
+                                it4
+                            )
+                        }
+                    }
+                }
+            }
 
-            ID_USER_CURRENT = null
-            AVENUE = null
-            APARTEMENT = null
-            PASSWORD = null
-            PHONE = null
-            TOKEN = null
-            EMAIL = null
-            NAME_USER = null
+            runBlocking {
+                if (currentUser != null) {
+                    userRepository.deleteUser(currentUser)
+                    Toast.makeText(context, "${NAME_USER.toString()} logged out...", Toast.LENGTH_SHORT).show()
+                    initVariable()
+                }
+            }
 
             loadFragment(context, CommandesFragment(context, myOrderRepository, orderItemRepository), R.string.commande_detail_page_title)
             MainActivity.navBar.show(2, true)
         }
+    }
+
+    private fun initVariable() {
+        ID_USER_CURRENT = null
+        AVENUE = null
+        APARTEMENT = null
+        PASSWORD = null
+        PHONE = null
+        TOKEN = null
+        EMAIL = null
+        NAME_USER = null
     }
 
 }

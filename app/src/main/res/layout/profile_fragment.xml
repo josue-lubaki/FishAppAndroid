@@ -7,16 +7,6 @@
     android:layout_margin="@dimen/small_size"
     android:background="@color/blue">
 
-<!--    <ImageView 37464C -->
-<!--        android:id="@+id/imageView2"-->
-<!--        android:layout_width="125dp"-->
-<!--        android:layout_height="125dp"-->
-<!--        android:src="@drawable/user"-->
-<!--        android:layout_marginTop="@dimen/item_margin"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imageView2"
         android:layout_width="125dp"
@@ -60,12 +50,11 @@
         style="@style/SubtitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/profile_page_name_client"
+        android:text="@string/tiret"
         android:textSize="@dimen/medium_size"
-        android:layout_marginStart="@dimen/item_margin"
         app:layout_constraintBottom_toBottomOf="@+id/profile_page_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/profile_page_telephone"
         app:layout_constraintTop_toTopOf="@+id/profile_page_name" />
 
     <TextView
@@ -85,7 +74,7 @@
         style="@style/SubtitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/profile_page_email_client"
+        android:text="@string/tiret"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/profile_name_input"
         app:layout_constraintTop_toTopOf="@+id/profile_page_email" />
@@ -108,9 +97,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxLines="1"
-        android:text="@string/profile_page_adresse_client"
-        android:textSize="@dimen/medium_size"
+        android:maxLines="2"
+        android:text="@string/tiret"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/profile_email_input"
         app:layout_constraintTop_toTopOf="@+id/profile_page_adresse" />
 
@@ -131,7 +120,7 @@
         style="@style/SubtitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/profile_page_telephone_client"
+        android:text="@string/tiret"
         android:textSize="@dimen/medium_size"
         app:layout_constraintStart_toStartOf="@+id/profile_adresse_input"
         app:layout_constraintTop_toTopOf="@+id/profile_page_telephone" />

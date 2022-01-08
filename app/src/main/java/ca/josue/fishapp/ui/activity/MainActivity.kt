@@ -7,6 +7,7 @@ import ca.josue.fishapp.R
 import ca.josue.fishapp.domain.repository.MyOrderRepository
 import ca.josue.fishapp.domain.repository.OrderItemRepository
 import ca.josue.fishapp.domain.repository.ProductRoomRepository
+import ca.josue.fishapp.domain.repository.UserRepository
 import ca.josue.fishapp.ui.fragment.CommandesFragment
 import ca.josue.fishapp.ui.fragment.HomeFragment
 import ca.josue.fishapp.ui.fragment.ProfileFragment
@@ -30,8 +31,11 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var orderItemRepository: OrderItemRepository
 
+    @Inject
+    lateinit var userRepository: UserRepository
 
-    lateinit var homeFragment : HomeFragment
+
+    private lateinit var homeFragment : HomeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnShowListener
                 }
                 3 -> {
-                    loadFragment(this,ProfileFragment(this, myOrderRepository, orderItemRepository), R.string.profile_page_title)
+                    loadFragment(this,ProfileFragment(this, myOrderRepository, orderItemRepository, userRepository), R.string.profile_page_title)
                     return@setOnShowListener
                 }
             }

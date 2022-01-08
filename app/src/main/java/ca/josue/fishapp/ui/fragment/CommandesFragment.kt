@@ -31,6 +31,7 @@ import ca.josue.fishapp.domain.viewModel.MyOrderViewModel
 import ca.josue.fishapp.domain.viewModel.OrderItemViewModel
 import ca.josue.fishapp.ui.BaseApplication.Companion.EMAIL
 import ca.josue.fishapp.ui.BaseApplication.Companion.NAME_USER
+import ca.josue.fishapp.ui.activity.Login.Companion.getInformationUser
 import ca.josue.fishapp.ui.activity.Splash
 import ca.josue.fishapp.ui.util.FragmentUtils.Companion.convertDate
 import kotlinx.coroutines.Dispatchers
@@ -94,10 +95,12 @@ class CommandesFragment(
                             }
                         }
 
-                        // récupèrer le phone
-                        PHONE = ordersListRoom[0].phone
-                        APARTEMENT = ordersListRoom[0].apartment
-                        AVENUE = ordersListRoom[0].avenue
+                        if (ordersListRoom.isNotEmpty()){
+                            // récupèrer le phone
+                            PHONE = ordersListRoom[0].phone
+                            APARTEMENT = ordersListRoom[0].apartment
+                            AVENUE = ordersListRoom[0].avenue
+                        }
                     }
 
                     override fun onFailure(call: Call<List<OrdersAPI>?>, t: Throwable) {
@@ -113,10 +116,10 @@ class CommandesFragment(
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return when {
+        return when{
             ordersListRoom.isNotEmpty() && ID_USER_CURRENT != null  -> inflater.inflate(R.layout.commandes_fragment, container, false)
             ID_USER_CURRENT == null -> inflater.inflate(R.layout.commandes_fragment_to_login, container, false)
-            ordersListRoom.isEmpty() && ID_USER_CURRENT == null -> inflater.inflate(R.layout.commandes_fragment_empty, container, false)
+            ordersListRoom.isEmpty() && ID_USER_CURRENT != null -> inflater.inflate(R.layout.commandes_fragment_empty, container, false)
             else -> inflater.inflate(R.layout.commandes_fragment_to_login, container, false)
         }
     }
@@ -124,21 +127,9 @@ class CommandesFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Vérifier les données de la préference
         val loginBtn : TextView = view.findViewById(R.id.ask_login_btn)
-        val preferences = context.getSharedPreferences(Login.NAME_PREFERENCE, Context.MODE_PRIVATE)
-        val emailPrefs = preferences.getString(getString(R.string.save_username_key), null)
-        val passwordPrefs = preferences.getString(getString(R.string.save_password_key), null)
-        val idUserCurrent = preferences.getString("ID_USER_CURRENT", null)
-        val nameUser = preferences.getString("NAME_USER", null)
 
-        if(emailPrefs != null && passwordPrefs != null && idUserCurrent != null && nameUser != null) {
-            ID_USER_CURRENT = idUserCurrent
-            NAME_USER = nameUser
-            EMAIL = emailPrefs
-        }
-
-       if(ordersListRoom.isNotEmpty()){
+       if(ordersListRoom.isNotEmpty() && ID_USER_CURRENT != null){
 
            commandesRecyclerView = view.findViewById(R.id.vertical_recyclerview_commandes)
 
@@ -150,11 +141,11 @@ class CommandesFragment(
                myOrderVM.insertMyOrders(ordersListRoom)
                orderItemVM.insertOrderItems(ordersItemsListRoom)
            }
-       }
 
-        myOrderVM.getMyOrders().observe(this.viewLifecycleOwner) { myOrderList ->
-            commandesRecyclerView?.adapter = CommandeAdapter(context, myOrderList, orderItemRepository)
-        }
+           myOrderVM.getMyOrders().observe(this.viewLifecycleOwner) { myOrderList ->
+               commandesRecyclerView?.adapter = CommandeAdapter(context, myOrderList, orderItemRepository)
+           }
+       }
 
         loginBtn.setOnClickListener {
             // Si l'Utilisateur n'est pas encore connecté
@@ -166,6 +157,7 @@ class CommandesFragment(
                 // retrieve All commands for user
                 ordersListRoom.clear()
                 getCommandesUser()
+                ID_USER_CURRENT?.let{ getInformationUser(it) }
                 MainActivity.navBar.show(1, true)
                 Toast.makeText(context, "Connexion réussie", Toast.LENGTH_LONG).show()
             }

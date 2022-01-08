@@ -31,7 +31,7 @@ class OrderItemAdapter(
         val orderCurrent : ProductRoom = listOrderItem[position]
         holder.title.text = orderCurrent.name
         holder.price.text = "$${orderCurrent.price.toInt()}"
-        Glide.with(context).load(orderCurrent.imageUrl).into(holder.imageProduct)
+        Glide.with(context).load(orderCurrent.imageUrl).placeholder(R.drawable.nofind).into(holder.imageProduct)
 
         holder.consultBtn.setOnClickListener {
             BaseApplication.PRODUCTVIEW = orderCurrent
