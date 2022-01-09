@@ -1,5 +1,5 @@
 # Android [![wakatime](https://wakatime.com/badge/github/josue-lubaki/FishApp-Android.svg)](https://wakatime.com/badge/github/josue-lubaki/FishApp-Android)
- Application Android pour le site web poisson-kin.com
+ Application Android pour le site web <a href="poisson-kin.com">poisson-kin.com</a>
  
  <a href="https://play.google.com/store/apps/details?id=ca.josue.fishapp"  rel="noopener noreferrer" target="_blank">
     <img src="https://images.squarespace-cdn.com/content/v1/6089653d9b3d423216d4fc70/1619912777616-MZTU900VIV41A3V2KLMQ/GooglePLay.png" 
@@ -14,6 +14,7 @@
 - Glide
 - Dagger Hilt
 - Room
+- RecyclerView
 - Airbnb Lottie
 
 ### Demo - video
